@@ -1,7 +1,0 @@
-.vscode/
-.next/
-node_modules/
-dist/
-package-lock.json
-tsconfig.json
-yarn.lock
