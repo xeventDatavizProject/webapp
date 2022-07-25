@@ -52,14 +52,11 @@ export const data = {
       stack: 'Stack 2',
     },
   ],
+
 };
 
 const BarData: NextPage = () => {
-  return (
-      <div className='container'>
-        <Bar options={options} data={data} />;
-      </div>
-  );
+  return <Bar options={options} data={data} />;
 };
 
 export default BarData;
