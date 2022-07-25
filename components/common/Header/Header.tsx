@@ -3,11 +3,14 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import Button from '../Button/Button';
 
+
 const links = [
   { label: 'Why XDA', to: '/why-xda' },
   { label: 'Solution', to: '/solution' },
   { label: 'Docs', to: '/documentation' },
   { label: 'Pricing', to: '/pricing' },
+  { label: 'graph', to: '/graph' },
+
 ];
 
 const Header: FC = () => {
