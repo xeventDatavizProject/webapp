@@ -6,7 +6,8 @@ import ChartsDoughnut from './Charts/Doughnut/doughnut';
 const Graph: NextPage = () => {
   return (
     <Layout>
-      <div className='container display'>
+      <div className='container'>
+
         <BarData/>;
         <ChartsDoughnut/>
       </div>

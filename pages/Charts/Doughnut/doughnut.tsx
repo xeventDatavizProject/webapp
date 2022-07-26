@@ -32,7 +32,9 @@ export const data = {
 };
 
 const ChartsDoughnut: NextPage = () => {
-  return <Doughnut data={data} />;
+  return (<div className='bg-white p-6  rounded-lg' style={{width:700}}>
+<Doughnut data={data} />
+  </div> );
 };
 
 export default ChartsDoughnut;

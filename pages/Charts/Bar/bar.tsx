@@ -5,6 +5,7 @@ import {
 } from 'chart.js';
 import { NextPage } from 'next';
 import { Bar } from 'react-chartjs-2';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 export const options = {
   plugins: {
@@ -56,7 +57,12 @@ export const data = {
 };
 
 const BarData: NextPage = () => {
-  return <Bar options={options} data={data} />;
+  return (
+    <div className='bg-white p-6 rounded-lg' style={{width:700}}>
+      <Bar options={options} data={data} />
+    </div>
+
+  )
 };
 
 export default BarData;
