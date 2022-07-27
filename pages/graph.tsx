@@ -1,18 +1,12 @@
-import { NextPage } from 'next';
+import { FC } from 'react';
 import Layout from '../components/common/Layout/Layout';
-import BarData from './Charts/Bar/bar';
-import ChartsDoughnut from './Charts/Doughnut/doughnut';
+import Graph from '../components/graph';
 
-const Graph: NextPage = () => {
+const GraphPage: FC = () => {
   return (
     <Layout>
-      <div className='container'>
-
-        <BarData/>;
-        <ChartsDoughnut/>
-      </div>
+      <Graph />
     </Layout>
   );
 };
-
-export default Graph;
+export default GraphPage;

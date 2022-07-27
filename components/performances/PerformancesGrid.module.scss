@@ -1,0 +1,20 @@
+.roundedLogoWrapper {
+  @apply relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    @apply w-full h-full rounded-full border border-blue-primary opacity-50;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.3);
+    @apply w-full h-full rounded-full border border-blue-primary opacity-50;
+  }
+}

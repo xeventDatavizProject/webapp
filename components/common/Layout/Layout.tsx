@@ -20,7 +20,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       }}
     >
       <Header />
-      <main className='pt-32'>{children}</main>
+      <main className='pt-20'>{children}</main>
       {/* <Footer /> */}
     </div>
   );
