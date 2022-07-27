@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
+import LoginModal from '../../login/LoginModal/LoginModal';
+import RegisterModal from '../../register/RegisterModal/RegisterModal';
 import Button from '../Button/Button';
 
 const links = [
@@ -9,16 +11,34 @@ const links = [
   { label: 'Docs', to: '/documentation' },
   { label: 'Pricing', to: '/pricing' },
   { label: 'Graph', to: '/graph' },
+  { label: 'Dashboard', to: '/dashboard' },
 ];
 
 const Header: FC = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showForgotModal, setShowForgotModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   return (
     <>
+      <LoginModal
+        show={showLoginModal}
+        onClickForgot={() => {
+          setShowLoginModal(false);
+          setShowForgotModal(true);
+        }}
+        onClose={() => setShowLoginModal(false)}
+      />
+      <RegisterModal
+        show={showRegisterModal}
+        onClickConnect={() => {
+          setShowRegisterModal(false);
+          setShowLoginModal(true);
+        }}
+        onClose={() => setShowRegisterModal(false)}
+      />
       <header
         className='py-6 overflow-hidden fixed z-50 w-full top-0 bg-blackish-primary h-20 flex items-center justify-center'
         style={{
@@ -68,7 +88,7 @@ const Header: FC = () => {
                   </Button.Outline>
                   <Button
                     onClick={() => {
-                      setShowLoginModal(true);
+                      setShowRegisterModal(true);
                       setIsOpen(false);
                     }}
                   >

@@ -25,7 +25,7 @@ const ButtonLarge: FC<ButtonProps> = ({ children, className, disabled, ...props 
   return (
     <button
       disabled={disabled}
-      className={`px-12 py-2 uppercase tracking-[5px] font-semibold bg-blue-primary flex justify-center transition-shadow duration-300 text-black
+      className={`px-12 py-2 tracking-wide font-light bg-blue-primary flex justify-center transition-shadow duration-300 text-white
       ${baseButtonClassName}
       ${disabled ? 'bg-blue-800 text-blue-primary opacity-50' : 'hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]'}
       ${className ?? ''}`}
