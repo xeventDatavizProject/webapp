@@ -5,6 +5,7 @@ import LoginModal from '../../login/LoginModal/LoginModal';
 import RegisterModal from '../../register/RegisterModal/RegisterModal';
 import Button from '../Button/Button';
 
+
 const links = [
   { label: 'Why XDA', to: '/why-xda' },
   { label: 'Solution', to: '/solution' },
