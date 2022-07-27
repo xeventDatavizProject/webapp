@@ -8,6 +8,7 @@ const links = [
   { label: 'Solution', to: '/solution' },
   { label: 'Docs', to: '/documentation' },
   { label: 'Pricing', to: '/pricing' },
+  { label: 'Graph', to: '/graph' },
 ];
 
 const Header: FC = () => {
