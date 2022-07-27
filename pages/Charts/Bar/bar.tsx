@@ -34,23 +34,30 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 export const data = {
   labels,
   datasets: [
+
     {
       label: 'Dataset 1',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: '#33BFFF',
       stack: 'Stack 0',
     },
     {
       label: 'Dataset 2',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgb(75, 192, 192)',
-      stack: 'Stack 1',
+      backgroundColor: "#22C55E",
+      stack: 'Stack 0',
     },
     {
       label: 'Dataset 3',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgb(53, 162, 235)',
-      stack: 'Stack 2',
+      backgroundColor: "#EC4899",
+      stack: 'Stack 0',
+    },
+    {
+      label: 'Dataset 4',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      backgroundColor: "#005B8F",
+      stack: 'Stack 0',
     },
   ],
 
@@ -58,7 +65,7 @@ export const data = {
 
 const BarData: NextPage = () => {
   return (
-    <div className='bg-white p-6 rounded-lg' style={{width:700}}>
+    <div className='bg-white p-6 rounded-lg' style={{width:800}}>
       <Bar options={options} data={data} />
     </div>
 
