@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useAppSelector } from 'hooks';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import AreaChart from '../components/charts/AreaChart';
 import RadarChart from '../components/charts/RadarChart';
 import VerticalBarChart from '../components/charts/VerticalBarChart';
@@ -13,6 +15,8 @@ import QueryView from '../components/Query/QueryView';
 const bgImage = '/assets/images/bg.png';
 
 const Dashboard: NextPage = () => {
+  const router = useRouter();
+  const state = useAppSelector(state => state.AuthReducer);
   const [selectedId, setSelectedId] = useState(null);
   const [cpu, setCpu] = useState(true);
   const [timestamp, setTimestamp] = useState(true);
@@ -27,6 +31,12 @@ const Dashboard: NextPage = () => {
       name: 'Timestamp',
     },
   ];
+
+  useEffect(() => {
+    if (!state.isLoggedIn) {
+      router.push('/login');
+    }
+  });
 
   return (
     <div
