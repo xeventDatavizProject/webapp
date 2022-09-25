@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import Button from '../../common/Button/Button';
+import Button from '../../common/Button';
 import Input from '../../common/Input/Input';
 
 type RegisterModalProps = {
@@ -85,9 +85,7 @@ const RegisterModal: FC<RegisterModalProps> = ({ show, onClose, onClickConnect }
             </a>
           </div> */}
 
-          <div className='flex justify-center'>
-            <Button.Large disabled={!formState.isValid}>Connect</Button.Large>
-          </div>
+          <div className='flex justify-center'>{/* <Button.Large disabled={!formState.isValid}>Connect</Button.Large> */}</div>
         </form>
       </Dialog.Panel>
     </Dialog>

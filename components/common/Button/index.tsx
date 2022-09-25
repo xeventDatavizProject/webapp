@@ -1,18 +1,44 @@
 import { ButtonHTMLAttributes, FC } from 'react';
+import Link from 'next/link';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
+  variant?: 'primary' | 'secondary' | 'light';
+  href?: string;
   children: React.ReactNode;
 }
 
-const baseButtonClassName = `px-4 py-1 rounded-lg`;
+const baseButtonClassName = `py-4 px-6 rounded-lg font-semibold leading-[normal]`;
+const variants = {
+  primary: 'bg-blue-primary text-white',
+  secondary: 'bg-black-primary text-white',
+  light: 'bg-grey-primary text-black-primary',
+};
 
-const ButtonRoot: FC<ButtonProps> = ({ children, className, disabled, ...props }) => {
+const ButtonRoot: FC<ButtonProps> = ({ children, className, disabled, href, variant = 'primary', ...props }) => {
+  if (href) {
+    return (
+      <Link href={href}>
+        <a
+          href={href}
+          className={`flex transition-shadow duration-300
+          ${variants[variant]}
+          ${baseButtonClassName}
+          ${disabled ? 'opacity-50' : 'hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]'}
+          ${className ?? ''}`}
+        >
+          {children}
+        </a>
+      </Link>
+    );
+  }
+
   return (
     <button
       disabled={disabled}
-      className={`bg-blue-primary flex transition-shadow duration-300
+      className={`flex transition-shadow duration-300
+      ${variants[variant]}
       ${baseButtonClassName}
-      ${disabled ? 'bg-blue-800 text-blue-primary opacity-50' : 'hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]'}
+      ${disabled ? 'opacity-70' : 'hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]'}
       ${className ?? ''}`}
       {...props}
     >
@@ -25,7 +51,7 @@ const ButtonLarge: FC<ButtonProps> = ({ children, className, disabled, ...props 
   return (
     <button
       disabled={disabled}
-      className={`px-12 py-2 tracking-wide font-light bg-blue-primary flex justify-center transition-shadow duration-300 text-white
+      className={`bg-blue-primary flex justify-center transition-shadow duration-300 text-white
       ${baseButtonClassName}
       ${disabled ? 'bg-blue-800 text-blue-primary opacity-50' : 'hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]'}
       ${className ?? ''}`}
@@ -66,11 +92,11 @@ const OutlineLarge: FC<ButtonProps> = ({ children, className, disabled, ...props
   );
 };
 
-const Button = Object.assign(ButtonRoot, {
-  Large: ButtonLarge,
-  Outline: Object.assign(Outline, {
-    Large: OutlineLarge,
-  }),
-});
+// const Button = Object.assign(ButtonRoot, {
+//   Large: ButtonLarge,
+//   Outline: Object.assign(Outline, {
+//     Large: OutlineLarge,
+//   }),
+// });
 
-export default Button;
+export default ButtonRoot;

@@ -6,14 +6,29 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['futura-pt', ...defaultTheme.fontFamily.sans],
+        inter: ['Inter', ...defaultTheme.fontFamily.sans],
+        poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
         playfairDisplay: ['"Playfair Display"', ...defaultTheme.fontFamily.sans],
+      },
+      fontSize: {
+        lg: '1.25rem',
+        xl: '1.5rem',
+        '2xl': '1.75rem',
+        '3xl': '2rem',
+        '4xl': '2.5rem',
       },
       colors: {
         blue: {
           primary: '#007EFF',
         },
-        blackish: {
-          primary: '#2F303A',
+        black: {
+          primary: '#121212',
+        },
+        grey: {
+          primary: '#D9D9D9',
+        },
+        error: {
+          primary: '#ff3333',
         },
       },
       backgroundImage: {
@@ -31,14 +46,14 @@ module.exports = {
     function ({ addComponents }) {
       addComponents({
         '.container': {
-          maxWidth: '85rem',
+          maxWidth: '90rem',
           marginRight: 'auto',
           marginLeft: 'auto',
           paddingRight: '1rem',
           paddingLeft: '1rem',
           '@screen md': {
-            paddingRight: '2rem',
-            paddingLeft: '2rem',
+            paddingRight: '5rem',
+            paddingLeft: '5rem',
           },
         },
       });

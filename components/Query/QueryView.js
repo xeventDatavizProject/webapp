@@ -1,9 +1,9 @@
-import '@uiw/react-textarea-code-editor/dist.css';
+// import '@uiw/react-textarea-code-editor/dist.css';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import Button from '../common/Button/Button';
+import Button from '../common/Button';
 
-const CodeEditor = dynamic(() => import('@uiw/react-textarea-code-editor').then(mod => mod.default), { ssr: false });
+// const CodeEditor = dynamic(() => import('@uiw/react-textarea-code-editor').then(mod => mod.default), { ssr: false });
 
 const QueryView = () => {
   const [code, setCode] = useState(`
@@ -17,7 +17,7 @@ TO SERVICE 'broker_service' , { 'broker_instance_specifier' | 'current database'
 
   return (
     <div>
-      <CodeEditor
+      {/* <CodeEditor
         value={code}
         language='sql'
         placeholder='Please enter sql query.'
@@ -29,7 +29,7 @@ TO SERVICE 'broker_service' , { 'broker_instance_specifier' | 'current database'
           fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
           width: '220px',
         }}
-      />
+      /> */}
       <Button className='mt-4'>Execute</Button>
     </div>
   );

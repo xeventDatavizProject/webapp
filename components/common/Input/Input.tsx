@@ -2,15 +2,19 @@ import { FC, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from 'r
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  placeholder?: string;
   error?: string;
 }
 
-const InputRoot: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ label, id, error, disabled, className, ...props }, ref) => {
+const InputRoot: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { label, placeholder, id, error, disabled, className, ...props },
+  ref,
+) => {
   return (
-    <div>
+    <div className='text-left'>
       <label
         htmlFor={id}
-        className={`mb-2 block
+        className={`mb-2 block text-sm
         ${error ? 'text-red-400' : 'text-black'}`}
       >
         {label}
@@ -18,7 +22,8 @@ const InputRoot: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ lab
       <input
         id={id}
         ref={ref}
-        className={`px-2 py-2 w-full text-opacity-70 rounded-lg outline-none border-none focus:ring-2 focus:ring-blue-primary
+        placeholder={placeholder || ''}
+        className={`px-4 py-3 w-full text-opacity-70 rounded-lg border border-grey-primary focus:ring-2 focus:ring-blue-primary
         ${disabled ? 'opacity-50' : ''}
         ${error ? 'ring-2 ring-red-400 text-red-400' : 'text-blackish-primary'}
         ${className ?? ''}`}
