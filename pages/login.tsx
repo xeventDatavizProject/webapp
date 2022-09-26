@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
@@ -36,6 +37,12 @@ const Login: NextPage = () => {
       router.push('/dashboard');
     }
   };
+
+  useEffect(() => {
+    if (state.isLoggedIn) {
+      router.push('/dashboard');
+    }
+  }, []);
 
   return (
     <Layout>

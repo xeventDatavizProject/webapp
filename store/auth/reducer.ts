@@ -1,35 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser } from 'api/auth';
-
-interface AuthState {
-  value: number;
-  isLoggedIn: boolean;
-  login: {
-    status: 'loading' | 'succeeded' | 'failed' | null;
-    error?: string;
-  };
-}
-
-// const isUserLoggedIn = localStorage.getItem('token') ? true : false;
-
-const initialState: AuthState = {
-  value: 0,
-  isLoggedIn: false,
-  login: {
-    status: null,
-    error: undefined,
-  },
-};
+import { AuthState } from './state';
 
 export const AuthSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: AuthState,
   reducers: {
-    increment: state => {
-      state.value += 1;
-    },
-    decrement: state => {
-      state.value -= 1;
+    setAuthLogged(state, action) {
+      state.isLoggedIn = action.payload;
     },
   },
   extraReducers(builder) {
@@ -53,6 +31,6 @@ export const AuthSlice = createSlice({
   },
 });
 
-export const { increment, decrement } = AuthSlice.actions;
+export const { setAuthLogged } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

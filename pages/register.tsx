@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -40,6 +41,12 @@ const Register: NextPage = () => {
       router.push('/dashboard');
     }
   };
+
+  useEffect(() => {
+    if (state.isLoggedIn) {
+      router.push('/dashboard');
+    }
+  }, []);
 
   return (
     <Layout>

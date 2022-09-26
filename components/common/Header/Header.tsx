@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import LoginModal from 'components/login/LoginModal/LoginModal';
 import RegisterModal from 'components/register/RegisterModal/RegisterModal';
 import Button from '../Button';
+import { useAppSelector, useAppDispatch } from 'hooks';
+import { getCurrentUser } from 'api/user';
 
 const links = [
   { label: 'Why XDA', to: '/why-xda' },
@@ -16,10 +18,22 @@ const links = [
 
 const Header: FC = () => {
   const router = useRouter();
+  const authState = useAppSelector(state => state.AuthReducer);
+  const usersState = useAppSelector(state => state.UsersReducer);
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const userID = localStorage.getItem('userId') || '';
+      await dispatch(getCurrentUser(userID));
+    };
+
+    fetchCurrentUser();
+  }, []);
 
   return (
     <>
@@ -77,9 +91,15 @@ const Header: FC = () => {
                   </li>
                 ))}
               </ul>
-              <Button href='/login' className='ml-10'>
-                Login
-              </Button>
+              {authState.isLoggedIn ? (
+                <Link href='/dashboard'>
+                  <a className='relative text-center ml-10'>{usersState.currentUser?.username}</a>
+                </Link>
+              ) : (
+                <Button href='/login' className='ml-10'>
+                  Login
+                </Button>
+              )}
               {/* <div className='mt-20 xl:mt-0 xl:flex-1 flex justify-end items-center space-x-4'>
                 <>
                   <Button.Outline

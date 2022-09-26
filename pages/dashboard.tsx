@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -17,6 +17,7 @@ const bgImage = '/assets/images/bg.png';
 const Dashboard: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector(state => state.AuthReducer);
+  const dispatch = useAppDispatch();
   const [selectedId, setSelectedId] = useState(null);
   const [cpu, setCpu] = useState(true);
   const [timestamp, setTimestamp] = useState(true);
@@ -36,7 +37,7 @@ const Dashboard: NextPage = () => {
     if (!state.isLoggedIn) {
       router.push('/login');
     }
-  });
+  }, []);
 
   return (
     <div
