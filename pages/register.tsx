@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
@@ -10,7 +11,7 @@ import { Title, Text } from 'components/common/Typography';
 import Button from 'components/common/Button';
 import { createUser } from 'api/auth';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { useRouter } from 'next/router';
+import { resetErrors } from 'store/auth/reducer';
 
 const schema = Yup.object({
   // firstname: Yup.string().trim().required('Required'),
@@ -25,7 +26,7 @@ type typeSchema = Yup.InferType<typeof schema>;
 const Register: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector(state => state.AuthReducer);
-  const error = useAppSelector(state => state.AuthReducer.login.error);
+  const error = useAppSelector(state => state.AuthReducer.createUser.error);
   const dispatch = useAppDispatch();
   const methods = useForm<typeSchema>({
     resolver: yupResolver(schema),
@@ -46,6 +47,10 @@ const Register: NextPage = () => {
     if (state.isLoggedIn) {
       router.push('/dashboard');
     }
+
+    return () => {
+      dispatch(resetErrors);
+    };
   }, []);
 
   return (
@@ -113,7 +118,7 @@ const Register: NextPage = () => {
               <Button className='mx-auto' disabled={!formState.isValid}>
                 Submit
               </Button>
-              {error && <Text className='text-error-primary mt-4'>{error}</Text>}
+              <div>Regiser {error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
             </form>
           </section>
           <Text className='mt-6'>

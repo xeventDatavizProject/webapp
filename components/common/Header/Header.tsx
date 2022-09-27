@@ -28,8 +28,8 @@ const Header: FC = () => {
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
-      const userID = localStorage.getItem('userId') || '';
-      await dispatch(getCurrentUser(userID));
+      const userID = localStorage.getItem('userId');
+      userID && (await dispatch(getCurrentUser(userID)));
     };
 
     fetchCurrentUser();

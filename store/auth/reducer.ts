@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser } from 'api/auth';
+import { createUser, loginUser } from 'api/auth';
 import { AuthState } from './state';
 
 export const AuthSlice = createSlice({
@@ -8,6 +8,10 @@ export const AuthSlice = createSlice({
   reducers: {
     setAuthLogged(state, action) {
       state.isLoggedIn = action.payload;
+    },
+    resetErrors(state) {
+      state.login.error = undefined;
+      state.createUser.error = undefined;
     },
   },
   extraReducers(builder) {
@@ -27,10 +31,21 @@ export const AuthSlice = createSlice({
         state.login.status = 'failed';
 
         state.login.error = action.error.message;
+      })
+      .addCase(createUser.pending, (state, action) => {
+        state.createUser.status = 'loading';
+      })
+      .addCase(createUser.fulfilled, (state, action) => {
+        state.createUser.status = 'succeeded';
+      })
+      .addCase(createUser.rejected, (state, action) => {
+        state.createUser.status = 'failed';
+
+        state.createUser.error = action.error.message;
       });
   },
 });
 
-export const { setAuthLogged } = AuthSlice.actions;
+export const { setAuthLogged, resetErrors } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

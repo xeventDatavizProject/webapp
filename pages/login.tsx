@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
@@ -8,9 +9,9 @@ import Input from 'components/common/Input/Input';
 import Layout from 'components/common/Layout/Layout';
 import { Title, Text } from 'components/common/Typography';
 import Button from 'components/common/Button';
-import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { loginUser } from 'api/auth';
+import { resetErrors } from 'store/auth/reducer';
 
 const schema = Yup.object({
   email: Yup.string().trim().email('Email invalid!').required('Required'),
@@ -42,6 +43,10 @@ const Login: NextPage = () => {
     if (state.isLoggedIn) {
       router.push('/dashboard');
     }
+
+    return () => {
+      dispatch(resetErrors);
+    };
   }, []);
 
   return (
@@ -79,7 +84,7 @@ const Login: NextPage = () => {
               <Button className='mx-auto' disabled={!formState.isValid}>
                 Connect
               </Button>
-              {error && <Text className='text-error-primary mt-4'>{error}</Text>}
+              <div>Login {error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
             </form>
           </section>
           <Text className='mt-6'>
