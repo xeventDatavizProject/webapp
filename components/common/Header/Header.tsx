@@ -6,6 +6,7 @@ import RegisterModal from 'components/register/RegisterModal/RegisterModal';
 import Button from '../Button';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { getCurrentUser } from 'api/user';
+import { setAuthLogged } from 'store/auth/reducer';
 
 const links = [
   { label: 'Why XDA', to: '/why-xda' },
@@ -25,6 +26,12 @@ const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+
+    dispatch(setAuthLogged(false));
+  };
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -92,9 +99,14 @@ const Header: FC = () => {
                 ))}
               </ul>
               {authState.isLoggedIn ? (
-                <Link href='/dashboard'>
-                  <a className='relative text-center ml-10'>{usersState.currentUser?.username}</a>
-                </Link>
+                <>
+                  <Link href='/dashboard'>
+                    <a className='relative text-center ml-10'>{usersState.currentUser?.username}</a>
+                  </Link>
+                  <Button onClick={logout} className='ml-10'>
+                    Logout
+                  </Button>
+                </>
               ) : (
                 <Button href='/login' className='ml-10'>
                   Login

@@ -1,6 +1,6 @@
 export interface AuthStateType {
   value: number;
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | null;
   login: {
     status: 'loading' | 'succeeded' | 'failed' | null;
     error?: string;
@@ -13,7 +13,7 @@ export interface AuthStateType {
 
 export const AuthState: AuthStateType = {
   value: 0,
-  isLoggedIn: false,
+  isLoggedIn: null,
   login: {
     status: null,
     error: undefined,

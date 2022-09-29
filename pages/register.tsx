@@ -36,17 +36,15 @@ const Register: NextPage = () => {
   const { control, handleSubmit, formState, reset } = methods;
 
   const onSubmit = async (data: typeSchema) => {
-    await dispatch(createUser(data));
+    await dispatch(createUser(data)).then(res => {
+      const status = res.meta.requestStatus;
 
-    if (state.login.status === 'succeeded') {
-      router.push('/dashboard');
-    }
+      status === 'fulfilled' && router.push('/dashboard');
+    });
   };
 
   useEffect(() => {
-    if (state.isLoggedIn) {
-      router.push('/dashboard');
-    }
+    state.isLoggedIn && router.push('/dashboard');
 
     return () => {
       dispatch(resetErrors);
@@ -118,7 +116,7 @@ const Register: NextPage = () => {
               <Button className='mx-auto' disabled={!formState.isValid}>
                 Submit
               </Button>
-              <div>Regiser {error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
+              <div>{error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
             </form>
           </section>
           <Text className='mt-6'>

@@ -11,7 +11,7 @@ import { Title, Text } from 'components/common/Typography';
 import Button from 'components/common/Button';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { loginUser } from 'api/auth';
-import { resetErrors } from 'store/auth/reducer';
+import { resetErrors, setAuthLogged } from 'store/auth/reducer';
 
 const schema = Yup.object({
   email: Yup.string().trim().email('Email invalid!').required('Required'),
@@ -32,22 +32,23 @@ const Login: NextPage = () => {
   const { control, handleSubmit, formState, reset, getValues } = methods;
 
   const onSubmit = async (data: typeSchema) => {
-    await dispatch(loginUser(data));
+    await dispatch(loginUser(data)).then(res => {
+      const status = res.meta.requestStatus;
 
-    if (state.login.status === 'succeeded') {
-      router.push('/dashboard');
-    }
+      if (status === 'fulfilled') {
+        dispatch(setAuthLogged(true));
+        router.push('/dashboard');
+      }
+    });
   };
 
   useEffect(() => {
-    if (state.isLoggedIn) {
-      router.push('/dashboard');
-    }
+    state.isLoggedIn && router.push('/dashboard');
 
     return () => {
       dispatch(resetErrors);
     };
-  }, []);
+  }, [router, dispatch]);
 
   return (
     <Layout>
@@ -84,7 +85,7 @@ const Login: NextPage = () => {
               <Button className='mx-auto' disabled={!formState.isValid}>
                 Connect
               </Button>
-              <div>Login {error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
+              <div>{error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
             </form>
           </section>
           <Text className='mt-6'>

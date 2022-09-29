@@ -34,9 +34,7 @@ const Dashboard: NextPage = () => {
   ];
 
   useEffect(() => {
-    if (!state.isLoggedIn) {
-      router.push('/login');
-    }
+    !state.isLoggedIn && router.push('/login');
   }, []);
 
   return (
