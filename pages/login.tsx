@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import Input from 'components/common/Input/Input';
 import Layout from 'components/common/Layout/Layout';
-import { Title, Text } from 'components/common/Typography';
+import { Title, Paragraph } from 'components/common/Typography';
 import Button from 'components/common/Button';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { loginUser } from 'api/auth';
@@ -85,15 +85,15 @@ const Login: NextPage = () => {
               <Button className='mx-auto' disabled={!formState.isValid}>
                 Connect
               </Button>
-              <div>{error && <Text className='text-error-primary mt-4'>{error}</Text>}</div>
+              <div>{error && <Paragraph className='text-error-primary mt-4'>{error}</Paragraph>}</div>
             </form>
           </section>
-          <Text className='mt-6'>
+          <Paragraph className='mt-6'>
             Don’t have an account ?
             <Link href='/register'>
               <a className='ml-2 underline'>Register</a>
             </Link>
-          </Text>
+          </Paragraph>
         </div>
       </div>
     </Layout>
