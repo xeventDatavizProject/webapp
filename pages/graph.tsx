@@ -1,11 +1,11 @@
+import Donuts from 'components/graph/Donuts';
 import { FC } from 'react';
 import Layout from '../components/common/Layout/Layout';
-import Graph from '../components/graph';
 
 const GraphPage: FC = () => {
   return (
     <Layout>
-      <Graph />
+      <Donuts />
     </Layout>
   );
 };
