@@ -17,9 +17,31 @@ const Donuts: FC = () => {
   const [requestData, setData] = useState<Request[]>([])
 
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+  const findQuery= (REQUESTDATA: Request[], key: string) =>{
+    let query: [] = [];
+    REQUESTDATA.forEach((x:any)=>{
+      if(query.some((val)=>{ return val[key] == x[key] })){
+      query.forEach((k)=>{
+        if(k[key] === x[key]){
+        k["occurrence"]++
+        }
+      })
+
+      }else{
+      let a = {}
+      a[key] = x[key]
+      a["occurrence"] = 1
+      query.push(a);
+      }
+    })
+
+    return query
+    }
+    let key = "query"
 useEffect(()=>{
-  setData(REQUESTDATA)
-  console.log(REQUESTDATA)
+  setData(findQuery(REQUESTDATA, key))
+  console.log(findQuery(REQUESTDATA, key));
 },[])
 
   const generateChartData = (): ChartData => {
@@ -27,7 +49,7 @@ useEffect(()=>{
     const labels: string[] = [];
 
     requestData.map((country) => {
-      data.push(country.times_called);
+      data.push(country.occurrence);
       labels.push(country.query);
     });
 
