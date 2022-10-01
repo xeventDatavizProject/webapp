@@ -3,47 +3,27 @@ import { Request } from "./request";
  const REQUESTDATA: Request[] =
   [{
   "id": "17782UGG",
-  "query": "select * from MOCK_DATA",
+  "query": "select",
    "times_called":200
   },
   {
-    "id": "17782UGG",
-    "query": "select * from MOCK_DATA",
-     "times_called":200
-    },
-    {
-      "id": "17782UGG",
-      "query": "select * from MOCK_DATA",
-       "times_called":200
-      },
-      {
-        "id": "17782UGG",
-        "query": "select * from MOCK_DATA",
-         "times_called":200
-        },
-        {
-          "id": "17782UGG",
-          "query": "select * from MOCK_DATA",
-           "times_called":200
-          },
-  {
     "id": "17782UNI",
-    "query": "selected",
+    "query": "show",
     "times_called": 180
     },
     {
       "id": "17782UNI",
-      "query": "select * from TABLE",
+      "query": "update",
       "times_called": 90
       },
       {
         "id": "17782UNI",
-        "query": "select * from SHEMA",
+        "query": "delete",
         "times_called": 60
         },
         {
           "id": "17782UNI",
-          "query": "select * from DATA",
+          "query": "Alter",
           "times_called": 20
           },
 ]

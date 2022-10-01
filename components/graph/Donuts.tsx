@@ -18,38 +18,29 @@ const Donuts: FC = () => {
 
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-  const findQuery= (REQUESTDATA: Request[], key: string) =>{
-    let query: [] = [];
-    REQUESTDATA.forEach((x:any)=>{
-      if(query.some((val)=>{ return val[key] == x[key] })){
-      query.forEach((k)=>{
-        if(k[key] === x[key]){
-        k["occurrence"]++
-        }
-      })
-
-      }else{
-      let a = {}
-      a[key] = x[key]
-      a["occurrence"] = 1
-      query.push(a);
-      }
-    })
-
-    return query
-    }
-    let key = "query"
+  const selectQuery =(checkTypeByUser:string[])=>{
+     const query:[] = [];
+     REQUESTDATA.forEach(element=>{
+       checkTypeByUser.forEach( type=>{
+        if (element.query.includes(type)){
+          query.push(element);
+       }
+       })
+     })
+     return query
+  }
+  const checkTypeByUser = ["select", "update", "delete", "show", "Alter"]
+  console.log(selectQuery(checkTypeByUser));
 useEffect(()=>{
-  setData(findQuery(REQUESTDATA, key))
-  console.log(findQuery(REQUESTDATA, key));
-},[])
+  setData(REQUESTDATA)
+},[]);
 
   const generateChartData = (): ChartData => {
     const data: number[] = [];
     const labels: string[] = [];
 
-    requestData.map((country) => {
-      data.push(country.occurrence);
+    REQUESTDATA.map((country) => {
+      data.push(country.times_called);
       labels.push(country.query);
     });
 
@@ -84,6 +75,7 @@ useEffect(()=>{
   return (
     <div>
      <Bar type="bar" data={generateChartData()} options={options} />
+
     </div>
     );
 };
