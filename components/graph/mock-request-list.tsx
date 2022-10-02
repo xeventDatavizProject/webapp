@@ -7,6 +7,16 @@ import { Request } from "./request";
    "times_called":200
   },
   {
+    "id": "17782UGG",
+    "query": "select * from dataBase",
+     "times_called":120
+    },
+    {
+      "id": "17782UGG",
+      "query": "select * from user",
+       "times_called":100
+      },
+  {
     "id": "17782UNI",
     "query": "show",
     "times_called": 180
@@ -21,6 +31,11 @@ import { Request } from "./request";
         "query": "delete",
         "times_called": 60
         },
+        {
+          "id": "17782UNI",
+          "query": "delete from user",
+          "times_called": 20
+          },
         {
           "id": "17782UNI",
           "query": "Alter",
