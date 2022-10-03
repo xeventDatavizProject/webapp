@@ -1,6 +1,6 @@
 import { BarElement, CategoryScale, Chart as ChartJS, ChartData, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import Input from 'components/common/Input/Input';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import Logs from './mock-request-list';
 
@@ -19,8 +19,7 @@ const Donuts: FC = () => {
   let data: number[] = [];
   let labels: string[] = [];
   const query: any[] = [];
-  const [selected, setSelected] = useState<boolean>(true);
-  const [checkedValue, setCheckedValue] = useState([]);
+  const [checkedValue, setCheckedValue] = useState(['select', 'show', 'delete', 'update', 'alter', 'insert']);
 
   const selectQuery = (queries: string[]) => {
     Logs.forEach(log => {
@@ -33,24 +32,23 @@ const Donuts: FC = () => {
     return query;
   };
 
-  // const CheckHandler = (e: React.FormEvent<HTMLInputElement>) => {
-  //   const value = e.currentTarget.value;
-  //   setCheckedValue((prev: any) =>
-  //   checkedValue.includes(value)
-  //       ? prev.filter((cur : string) => cur !== value)
-  //       : [...prev, e.currentTarget.value]
-  //   );
-  // };
+  const CheckHandler = (e: any) => {
+    const value = e.target.value;
+    setCheckedValue((prev: any) =>
+      checkedValue.includes(value as never) ? prev.filter((cur: string) => cur !== value) : [...prev, e.target.value],
+    );
+  };
 
   const generateChartData = (): ChartData<'bar'> => {
-    if (selected) list.push('select');
-    else list.filter(e => e !== 'select');
-
-    selectList = selectQuery(list);
+    selectList = selectQuery(checkedValue);
     selectList.map(x => {
       data.push(x.times_called);
       labels.push(x.query);
     });
+
+    useEffect(() => {
+      console.log(checkedValue);
+    }, [checkedValue]);
 
     return {
       labels,
@@ -87,10 +85,46 @@ const Donuts: FC = () => {
         <div className='flex-grow z-20  font-mono tracking-widest text-xs mb-5'>hide/show Query types</div>
         <Input.Checkbox
           label='select'
-          id='select-toggle'
+          id='select'
           value='select'
           className='peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600'
-          onChange={() => setSelected(!selected)}
+          onClick={CheckHandler}
+        />
+        <Input.Checkbox
+          label='show'
+          id='show'
+          value='show'
+          className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-blue-600'
+          onClick={CheckHandler}
+        />
+        <Input.Checkbox
+          label='delete'
+          id='delete'
+          value='delete'
+          className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-teal-600'
+          onClick={CheckHandler}
+        />
+        <Input.Checkbox
+          label='alter'
+          id='alter'
+          value='alter'
+          className='peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-green-500'
+          onClick={CheckHandler}
+        />
+        <Input.Checkbox
+          label='update'
+          id='update'
+          value='update'
+          className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
+          onClick={CheckHandler}
+        />
+
+        <Input.Checkbox
+          label='insert'
+          id='insert'
+          value='insert'
+          className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
+          onClick={CheckHandler}
         />
       </div>
     </div>

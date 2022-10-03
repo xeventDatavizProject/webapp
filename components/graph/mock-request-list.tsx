@@ -8,6 +8,16 @@ const Logs: Request[] = [
   },
   {
     id: '17782UGG',
+    query: 'insert',
+    times_called: 200,
+  },
+  {
+    id: '17782UGG',
+    query: 'insert',
+    times_called: 200,
+  },
+  {
+    id: '17782UGG',
     query: 'select * from dataBase',
     times_called: 120,
   },
