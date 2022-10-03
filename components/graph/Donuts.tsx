@@ -24,6 +24,7 @@ const Donuts: FC<performancesListProps> = ({setSelect}) => {
 
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
   const [requestData, setData] = useState<any>()
+  const [selected, setSelected] = useState<boolean>(true)
   const selectQuery =(checkTypeByUser:string[])=>{
      const query:[] = [];
      REQUESTDATA.forEach(element=>{
@@ -39,13 +40,14 @@ const Donuts: FC<performancesListProps> = ({setSelect}) => {
 let selectList: any[];
 let data: number[] = [];
 let labels: string[] = [];
+
 const generateChartData = (): ChartData<"bar"> => {
   list.push("select")
   selectList = selectQuery(list)
-selectList.map((country) => {
-  data.push(country.times_called);
-  labels.push(country.query);
-});
+  selectList.map((x) => {
+    data.push(x.times_called);
+    labels.push(x.query)
+  })
   return {
     labels,
     datasets: [
@@ -72,26 +74,26 @@ selectList.map((country) => {
       },
     ],
 };
+
 };
 useEffect(()=>{
-  generateChartData;
-},[data, labels]);
+  return setSelected(<Bar data={generateChartData()} options={options} />);
+},[selected]);
+
   return (
     <div>
-      <Bar data={generateChartData()} options={options}/>
      <div className='w-56 mx-1 h-1/3 mt-1 shadow-lg rounded-lg p-4 z-[99999999]   border-zinc-800'>
             <div className='flex-grow z-20  font-mono tracking-widest text-xs mb-5'>hide/show Query types</div>
             <Input.Checkbox
-        label='Select'
-        id='cpu-toggle'
-        value='Select'
-        className='peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600'
-        onChange={()=>setData}
-      />
-    </div>
+                label='select'
+                id='select-toggle'
+                value='select'
+                className='peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600'
+                onChange= {()=>setSelected(!selected)}
+            />
+</div>
     </div>
     );
 };
 export default Donuts;
-
 
