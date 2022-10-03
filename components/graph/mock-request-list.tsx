@@ -47,8 +47,8 @@ const Logs: Request[] = [
     times_called: 20,
   },
   {
-    id: '17782UNI',
-    query: 'Alter',
+    id: '17782U6I',
+    query: 'alter',
     times_called: 20,
   },
 ];

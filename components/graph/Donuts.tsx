@@ -97,21 +97,21 @@ const Donuts: FC = () => {
             label='show'
             id='show'
             value='show'
-            className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-blue-600'
+            className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-green-600'
             onClick={CheckHandler}
           />
           <Input.Checkbox
             label='delete'
             id='delete'
             value='delete'
-            className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-teal-600'
+            className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-red-500'
             onClick={CheckHandler}
           />
           <Input.Checkbox
             label='alter'
             id='alter'
             value='alter'
-            className='peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-green-500'
+            className='peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-yellow-500'
             onClick={CheckHandler}
           />
           <Input.Checkbox
@@ -126,7 +126,7 @@ const Donuts: FC = () => {
             label='insert'
             id='insert'
             value='insert'
-            className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
+            className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-gray-600'
             onClick={CheckHandler}
           />
         </div>
