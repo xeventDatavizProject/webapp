@@ -35,7 +35,7 @@ const Donuts: FC = () => {
   const CheckHandler = (e: any) => {
     const value = e.target.value;
     setCheckedValue((prev: any) =>
-      checkedValue.includes(value as never) ? prev.filter((cur: string) => cur !== value) : [...prev, e.target.value],
+      checkedValue.includes(value as never) ? prev.filter((current: string) => current !== value) : [...prev, e.target.value],
     );
   };
 
@@ -79,53 +79,57 @@ const Donuts: FC = () => {
   };
 
   return (
-    <div>
-      <Bar data={generateChartData()} options={options} />
-      <div className='w-56 mx-1 h-1/3 mt-1 shadow-lg rounded-lg p-4 z-[99999999]   border-zinc-800'>
-        <div className='flex-grow z-20  font-mono tracking-widest text-xs mb-5'>hide/show Query types</div>
-        <Input.Checkbox
-          label='select'
-          id='select'
-          value='select'
-          className='peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600'
-          onClick={CheckHandler}
-        />
-        <Input.Checkbox
-          label='show'
-          id='show'
-          value='show'
-          className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-blue-600'
-          onClick={CheckHandler}
-        />
-        <Input.Checkbox
-          label='delete'
-          id='delete'
-          value='delete'
-          className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-teal-600'
-          onClick={CheckHandler}
-        />
-        <Input.Checkbox
-          label='alter'
-          id='alter'
-          value='alter'
-          className='peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-green-500'
-          onClick={CheckHandler}
-        />
-        <Input.Checkbox
-          label='update'
-          id='update'
-          value='update'
-          className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
-          onClick={CheckHandler}
-        />
+    <div className='flex flex-row'>
+      <div className=' w-11/12'>
+        <Bar data={generateChartData()} options={options} />
+      </div>
+      <div className=''>
+        <span className='w-1/12 z-20 font-mono tracking-widest text-xs mb-5 inline-block'>hide/show Query types</span>
+        <div className=' space-y-4'>
+          <Input.Checkbox
+            label='select'
+            id='select'
+            value='select'
+            className='peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600'
+            onClick={CheckHandler}
+          />
+          <Input.Checkbox
+            label='show'
+            id='show'
+            value='show'
+            className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-blue-600'
+            onClick={CheckHandler}
+          />
+          <Input.Checkbox
+            label='delete'
+            id='delete'
+            value='delete'
+            className='peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-teal-600'
+            onClick={CheckHandler}
+          />
+          <Input.Checkbox
+            label='alter'
+            id='alter'
+            value='alter'
+            className='peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-green-500'
+            onClick={CheckHandler}
+          />
+          <Input.Checkbox
+            label='update'
+            id='update'
+            value='update'
+            className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
+            onClick={CheckHandler}
+          />
 
-        <Input.Checkbox
-          label='insert'
-          id='insert'
-          value='insert'
-          className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
-          onClick={CheckHandler}
-        />
+          <Input.Checkbox
+            label='insert'
+            id='insert'
+            value='insert'
+            className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500'
+            onClick={CheckHandler}
+          />
+        </div>
       </div>
     </div>
   );
