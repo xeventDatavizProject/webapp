@@ -35,6 +35,7 @@ const Dashboard: NextPage = () => {
     }
   }, []);
 
+  if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (
     <div className='w-full flex bg-white text-black-primary'>
       <Sidebar />

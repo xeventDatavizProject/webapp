@@ -26,36 +26,8 @@ export const options = {
   // },
 };
 
-const labels = ['Query 1', 'Query 2', 'Query 3', 'April', 'May', 'June', 'July'];
-
-export const localData = {
-  labels,
-  datasets: [
-    {
-      label: 'CPU',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    // {
-    //   label: 'Timestamp',
-    //   data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-    //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    // },
-    // {
-    //   label: 'Session',
-    //   data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-    //   backgroundColor: 'rgba(53, 162, 235, 1)',
-    // },
-    // {
-    //   label: 'Runtime',
-    //   data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-    //   backgroundColor: 'rgba(53, 162, 205, 0.2)',
-    // },
-  ],
-};
-
-type Params = { data: QueriesType[] };
-const VerticalBarChart: FC<Params> = ({ data }) => {
+type VerticalBarParams = { data: QueriesType[] };
+const VerticalBarChart: FC<VerticalBarParams> = ({ data }) => {
   const [currentData, setCurrentData] = useState(data);
   const [queryLong, setQueryLong] = useState('0.5');
   const labels = currentData.map(item => item.rows_sent);
