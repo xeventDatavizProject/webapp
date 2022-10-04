@@ -14,11 +14,12 @@ const options = {
 
 const Donuts: FC = () => {
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-  const list: string[] = [];
+
   let selectList: any[];
   let data: number[] = [];
   let labels: string[] = [];
   const query: any[] = [];
+
   const [checkedValue, setCheckedValue] = useState(['select', 'show', 'delete', 'update', 'alter', 'insert']);
 
   const selectQuery = (queries: string[]) => {
@@ -126,7 +127,7 @@ const Donuts: FC = () => {
             label='insert'
             id='insert'
             value='insert'
-            className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-gray-600'
+            className='peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-brown-600'
             onClick={CheckHandler}
           />
         </div>

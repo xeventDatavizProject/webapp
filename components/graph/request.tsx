@@ -1,3 +1,4 @@
+
 export type Request = {
   id:string
   query:string;
@@ -7,3 +8,11 @@ export type Request = {
 export type  REQUEST= {
   RequestData:Request[]
 };
+
+export type ErrorQueryType = {
+  id: string,
+query: string,
+date_hour: Date,
+}
+
+
