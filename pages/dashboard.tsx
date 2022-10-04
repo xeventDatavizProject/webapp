@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -11,12 +11,11 @@ import VerticalBarChart from 'components/charts/VerticalBarChart';
 import { getAllQueries } from 'api/queries';
 
 const Dashboard: NextPage = () => {
-  const [queryLong, setQueryLong] = useState('1.5');
   const router = useRouter();
   const state = useAppSelector(state => state);
   const dispatch = useAppDispatch();
   const getAllQuery = async (queryTime?: string) => {
-    await dispatch(getAllQueries({ userId: 'qsldjkqsd', queryTime: queryTime || queryLong }));
+    await dispatch(getAllQueries({ userId: 'qsldjkqsd', queryTime: queryTime }));
   };
 
   useEffect(() => {
@@ -60,7 +59,7 @@ const Dashboard: NextPage = () => {
             <VerticalBarChart data={state.QueriesReducer.allQueries.data} />
           </div>
 
-          <div className='card__footer'>
+          {/* <div className='card__footer'>
             <div>
               <input
                 type='number'
@@ -75,7 +74,7 @@ const Dashboard: NextPage = () => {
               />
             </div>
             <div></div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
