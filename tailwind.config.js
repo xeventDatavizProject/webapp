@@ -22,13 +22,19 @@ module.exports = {
           primary: '#007EFF',
         },
         black: {
-          primary: '#121212',
+          primary: '#2F303A',
         },
         grey: {
           primary: '#D9D9D9',
         },
+        white: '#FDFDFF',
         error: {
           primary: '#ff3333',
+        },
+      },
+      bg: {
+        black: {
+          primary: '#2F303A',
         },
       },
       backgroundImage: {

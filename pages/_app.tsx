@@ -7,9 +7,9 @@ import '../styles/_styles.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      Store.dispatch(setAuthLogged(true));
-    }
+    const token = localStorage.getItem('token');
+
+    Store.dispatch(setAuthLogged(Boolean(token)));
   }, []);
 
   return (
