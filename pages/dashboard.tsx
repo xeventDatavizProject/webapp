@@ -4,10 +4,13 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+
 import AreaChart from '../components/charts/AreaChart';
 import RadarChart from '../components/charts/RadarChart';
 import VerticalBarChart from '../components/charts/VerticalBarChart';
 import CheckList from '../components/checkList/CheckList';
+import UserRequest from '../components/charts/UserRequest';
+
 import Icons from '../components/icons';
 import PerformanceGrid from '../components/performances/PerformancesGrid';
 import QueryView from '../components/Query/QueryView';
@@ -50,7 +53,7 @@ const Dashboard: NextPage = () => {
         backgroundPosition: 'center',
       }}
     >
-      <div className='flex flex-col h-screen'>
+      <div className='flex'>
         <div className='flex flex-1 overflow-hidden'>
           <div className='hidden md:flex w-60 overflow-auto mr-1 bg-blue-primary bg-opacity-50 z-20'>
             <div className='flex flex-1 flex-col divide-y divide-gray-300'>
@@ -85,9 +88,10 @@ const Dashboard: NextPage = () => {
             <div className='flex w-full mx-auto h-1/2 p-4  border-zinc-800'>
               <div className='flex flex-col z-20 font-mono tracking-widest text-xs w-[550px] 2xl:mx-auto'>
                 <RadarChart cpu={cpu} timestamp={timestamp} />
-                <div className='flex mr-10'>
+                <div className='container-md mt-7'>
                   <VerticalBarChart />
                   <AreaChart />
+                  <UserRequest />
                 </div>
               </div>
             </div>

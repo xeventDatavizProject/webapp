@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "develop": "next dev -p 3001",
+    "develop": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "format": "prettier --write \"**/*.{scss,js,jsx,ts,tsx,json,md}\"",
