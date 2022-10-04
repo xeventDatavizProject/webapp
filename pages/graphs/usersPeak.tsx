@@ -1,20 +1,16 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import SimpleAreaChart from 'components/charts/SimpleAreaChart';
+import SimpleVerticalBarChart from 'components/charts/SimpleVerticalBarChart';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import AreaChart from '../components/charts/AreaChart';
-import RadarChart from '../components/charts/RadarChart';
-import VerticalBarChart from '../components/charts/VerticalBarChart';
-import CheckList from '../components/checkList/CheckList';
-import Icons from '../components/icons';
-import PerformanceGrid from '../components/performances/PerformancesGrid';
-import QueryView from '../components/Query/QueryView';
+import Icons from '../../components/icons';
+import QueryView from '../../components/Query/QueryView';
 
 const bgImage = '/assets/images/bg.png';
 
-const Dashboard: NextPage = () => {
+const UsersPeak: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector(state => state.AuthReducer);
   const dispatch = useAppDispatch();
@@ -62,16 +58,7 @@ const Dashboard: NextPage = () => {
                 </div>
               </div>
               <div className='flex w-full mx-auto h-1/2 p-4'>
-                <div className='flex-grow z-20 font-mono tracking-widest text-xs'>
-                  <p>Select graph</p>
-                  <ul>
-                    <li><Link href="/graphs/usersPeak">
-                      <a>Users peak</a>
-                    </Link>
-                    </li>
-                  </ul>
-                </div>
-
+                <div className='flex-grow z-20 font-mono tracking-widest text-xs'>select graph</div>
               </div>
               <div className='w-full mx-auto h-1/2  p-4'>
                 <div className='flex-grow z-20 font-mono tracking-widest text-xs mb-4'>Query</div>
@@ -91,30 +78,15 @@ const Dashboard: NextPage = () => {
             {/* <Icons.Logo /> */}
           </div>
           <div className='flex flex-1 flex-col divide-y divide-gray-300 pt-[5vh]'>
-            <div className='flex w-full mx-auto h-1/2 p-4  border-zinc-800'>
+            <div className='flex w-full justify-center mx-auto h-1/2 p-4 border-zinc-800'>
+              <h4 className='p-4'>Pic d'utilisation</h4>
               <div className='flex flex-col z-20 font-mono tracking-widest text-xs w-[550px] 2xl:mx-auto'>
-                <RadarChart cpu={cpu} timestamp={timestamp} />
-                <div className='flex mr-10'>
-                  <VerticalBarChart />
-                  <AreaChart />
+                <div className='grid gap-y-3 m-10'>
+                  <SimpleAreaChart />
+                  <SimpleVerticalBarChart />
                 </div>
               </div>
             </div>
-            {/* <div className='flex w-full mx-auto h-1/2 p-4 bg-[#e3e7ec] bg-opacity-25  border-zinc-800'>
-              <div className='flex-grow z-20 font-mono tracking-widest text-xs'>Query</div>
-            </div> */}
-          </div>
-          <div className='pt-[15vh]'>
-            <PerformanceGrid />
-            <CheckList cpu={cpu} setCpu={setCpu} timestamp={timestamp} setTimestamp={setTimestamp} />
-            <AnimatePresence>
-              {selectedId && (
-                <motion.div layoutId={selectedId}>
-                  <h2>Hello</h2>
-                  <motion.button onClick={() => setSelectedId(null)} />
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -122,4 +94,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default Dashboard;
+export default UsersPeak;
