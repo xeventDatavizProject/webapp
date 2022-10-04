@@ -1,5 +1,5 @@
 import { ArcElement, Chart as ChartJS, Legend, Title, Tooltip } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -36,10 +36,71 @@ const dataQueries = [
       time: 1664055794211,
     },
   },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'blah',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'test',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'root',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'blah',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
 ];
-
-
-
 
 const sortUsers = () => {
   let users = [];
@@ -99,7 +160,7 @@ let UserRequest = () => {
       <h3 className='text-center' style={{ color: 'grey' }}>
         Requests by Users
       </h3>
-      <Pie data={data} />
+      <Doughnut data={data} />
     </div>
   );
 };
