@@ -85,13 +85,9 @@ const data = {
         'rgb(75, 192, 192)',
       ],
       borderWidth: 1,
-      Legend: {
+      title: {
         display: true,
-        position: 'top',
-      },
-      Title: {
-        display: true,
-        text: 'Requests by user',
+        text: 'Requests by Users',
       },
     },
   ],
@@ -99,7 +95,10 @@ const data = {
 
 let UserRequest = () => {
   return (
-    <div className='bg-black' style={{ width: 'auto' }}>
+    <div className='bg-black justify-center mx-auto' style={{ width: '350px' }}>
+      <h3 className='text-center' style={{ color: 'grey' }}>
+        Requests by Users
+      </h3>
       <Pie data={data} />
     </div>
   );
