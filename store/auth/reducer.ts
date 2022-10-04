@@ -9,6 +9,12 @@ export const AuthSlice = createSlice({
     setAuthLogged(state, action) {
       state.isLoggedIn = action.payload;
     },
+    logoutAuth(state) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+
+      state.isLoggedIn = false;
+    },
     resetErrors(state) {
       state.login.error = undefined;
       state.createUser.error = undefined;
@@ -46,6 +52,6 @@ export const AuthSlice = createSlice({
   },
 });
 
-export const { setAuthLogged, resetErrors } = AuthSlice.actions;
+export const { setAuthLogged, resetErrors, logoutAuth } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

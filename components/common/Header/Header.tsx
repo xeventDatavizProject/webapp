@@ -6,6 +6,7 @@ import RegisterModal from 'components/register/RegisterModal/RegisterModal';
 import Button from '../Button';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { getCurrentUser } from 'api/user';
+import { logoutAuth } from 'store/auth/reducer';
 
 const links = [
   { label: 'Why XDA', to: '/why-xda' },
@@ -13,7 +14,7 @@ const links = [
   { label: 'Docs', to: '/documentation' },
   { label: 'Pricing', to: '/pricing' },
   { label: 'Graph', to: '/graph' },
-  { label: 'Dashboard', to: '/dashboard' },
+  { label: 'Dashboard', to: '/dashboard', protected: true },
 ];
 
 const Header: FC = () => {
@@ -25,6 +26,7 @@ const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const logout = () => dispatch(logoutAuth());
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -74,27 +76,30 @@ const Header: FC = () => {
             {/* ${isOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0'}  */}
             <div className='m-auto flex flex-col xl:flex-row justify-center items-center'>
               <ul className='flex flex-col xl:flex-row justify-center items-center space-y-6 xl:space-y-0 xl:space-x-8'>
-                {links.map((link, index) => (
-                  <li key={`Link_${index}`}>
-                    <Link href={link.to} passHref>
-                      <a
-                        className={`relative text-center
+                {links.map((link, index) => {
+                  if (link.protected && !authState.isLoggedIn) return null;
+                  return (
+                    <li key={`Link_${index}`}>
+                      <Link href={link.to} passHref>
+                        <a
+                          className={`relative text-center
                       ${
                         router.pathname === link.to
                           ? 'font-bold before:absolute before:w-full before:h-px before:bg-white before:-bottom-1'
                           : ''
                       }`}
-                      >
-                        {link.label}
-                      </a>
-                    </Link>
-                  </li>
-                ))}
+                        >
+                          {link.label}
+                        </a>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
               {authState.isLoggedIn ? (
-                <Link href='/dashboard'>
-                  <a className='relative text-center ml-10'>{usersState.currentUser?.username}</a>
-                </Link>
+                <Button onClick={logout} className='ml-10'>
+                  Logout
+                </Button>
               ) : (
                 <Button href='/login' className='ml-10'>
                   Login
