@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
+import { getAllInstances } from 'api/instances';
+import { getAllQueries } from 'api/queries';
+import { getCurrentUser } from 'api/user';
+import VerticalBarChart from 'components/charts/VerticalBarChart';
+import { Title } from 'components/common/Typography';
+import Sidebar from 'components/dashboard/Sidebar';
+import Icons from 'components/icons';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import Sidebar from 'components/dashboard/Sidebar';
-import { Title } from 'components/common/Typography';
-import { getCurrentUser } from 'api/user';
-import { getAllInstances } from 'api/instances';
-import Icons from 'components/icons';
-import VerticalBarChart from 'components/charts/VerticalBarChart';
-import { getAllQueries } from 'api/queries';
+import { useEffect } from 'react';
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
