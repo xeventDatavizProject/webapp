@@ -1,12 +1,12 @@
 import { QueriesType, ReqType } from 'store';
 
 export interface QueriesStateType {
-  allQueries: ReqType & { data: QueriesType[] };
+  allQueries: ReqType & { data: QueriesType[] | null };
 }
 
 export const QueriesState: QueriesStateType = {
   allQueries: {
-    data: [],
+    data: null,
     status: null,
   },
 };

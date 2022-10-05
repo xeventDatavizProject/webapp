@@ -25,7 +25,7 @@ export const getAllQueries = createAsyncThunk('queries/getAllQueries', async (pa
   //   .then(res => res.data)
   //   .catch(err => Promise.reject(err.response.data.message ? err.response.data.message : err.message));
   const response = await axios
-    .get(`api/queries`)
+    .get(`/api/queries`)
     .then(res => res.data)
     .catch(err => Promise.reject(err.response.data.message ? err.response.data.message : err.message));
 
