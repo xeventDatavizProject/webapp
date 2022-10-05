@@ -1,17 +1,15 @@
-import type { NextPage } from 'next';
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
+import { createUser } from 'api/auth';
+import Button from 'components/common/Button';
 import Input from 'components/common/Input/Input';
 import Layout from 'components/common/Layout/Layout';
-import { Title, Paragraph } from 'components/common/Typography';
-import Button from 'components/common/Button';
-import { createUser } from 'api/auth';
+import { Paragraph, Title } from 'components/common/Typography';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { resetErrors } from 'store/auth/reducer';
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form';
+import * as Yup from 'yup';
 
 const schema = Yup.object({
   // firstname: Yup.string().trim().required('Required'),
@@ -39,17 +37,17 @@ const Register: NextPage = () => {
     await dispatch(createUser(data)).then(res => {
       const status = res.meta.requestStatus;
 
-      status === 'fulfilled' && router.push('/dashboard');
+      // status === 'fulfilled' && router.push('/dashboard');
     });
   };
 
-  useEffect(() => {
-    state.isLoggedIn && router.push('/dashboard');
+  // useEffect(() => {
+  //   state.isLoggedIn && router.push('/dashboard');
 
-    return () => {
-      dispatch(resetErrors);
-    };
-  }, []);
+  //   return () => {
+  //     dispatch(resetErrors);
+  //   };
+  // }, []);
 
   return (
     <Layout>

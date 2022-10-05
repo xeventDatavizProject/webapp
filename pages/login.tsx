@@ -1,17 +1,16 @@
-import { useEffect } from 'react';
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
+import { loginUser } from 'api/auth';
+import Button from 'components/common/Button';
 import Input from 'components/common/Input/Input';
 import Layout from 'components/common/Layout/Layout';
-import { Title, Paragraph } from 'components/common/Typography';
-import Button from 'components/common/Button';
+import { Paragraph, Title } from 'components/common/Typography';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { loginUser } from 'api/auth';
-import { resetErrors, setAuthLogged } from 'store/auth/reducer';
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form';
+import { setAuthLogged } from 'store/auth/reducer';
+import * as Yup from 'yup';
 
 const schema = Yup.object({
   email: Yup.string().trim().email('Email invalid!').required('Required'),
@@ -37,18 +36,18 @@ const Login: NextPage = () => {
 
       if (status === 'fulfilled') {
         dispatch(setAuthLogged(true));
-        router.push('/dashboard');
+        router.push('/register-instance');
       }
     });
   };
 
-  useEffect(() => {
-    state.isLoggedIn && router.push('/dashboard');
+  // useEffect(() => {
+  //   state.isLoggedIn && router.push('/dashboard');
 
-    return () => {
-      dispatch(resetErrors);
-    };
-  }, [router, dispatch]);
+  //   return () => {
+  //     dispatch(resetErrors);
+  //   };
+  // }, [router, dispatch]);
 
   return (
     <Layout>

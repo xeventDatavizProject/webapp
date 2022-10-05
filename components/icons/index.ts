@@ -7,6 +7,7 @@ import Notification from './Notification';
 import Print from './Print';
 import Refresh from './Refresh';
 import Settings from './Settings';
+import Spin from './Spin';
 import Trash from './Trash';
 import User from './User';
 
@@ -22,6 +23,7 @@ const Icons = {
   Logo,
   Logout,
   Trash,
+  Spin,
 };
 
 export default Icons;
