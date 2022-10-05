@@ -37,9 +37,8 @@ export const data = {
 type SimpleAreaParams = { data: QueriesType[] };
 const SimpleAreaChart: FC<SimpleAreaParams> = ({ data }) => {
   const numberOcc: { [key: string]: number } = {};
-  const arrayData = data.map(item => {
-    const date = new Date(item.timestamp);
-
+  data.map(item => {
+    const date = new Date(item.date_hour);
     const hours = date.getHours();
 
     if (hours in numberOcc) {
@@ -58,7 +57,7 @@ const SimpleAreaChart: FC<SimpleAreaParams> = ({ data }) => {
     datasets: [
       {
         fill: true,
-        label: 'Dataset 2',
+        label: 'Queries',
         data: Object.values(numberOcc),
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
@@ -73,9 +72,7 @@ const SimpleAreaChart: FC<SimpleAreaParams> = ({ data }) => {
     ],
   };
 
-  // console.log(arrayData);
-
-  return <Line options={options} data={dataset} />; //&&
+  return <Line options={options} data={dataset} />;
 };
 
 export default SimpleAreaChart;

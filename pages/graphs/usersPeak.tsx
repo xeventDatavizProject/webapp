@@ -1,8 +1,5 @@
-import { getAllInstances } from 'api/instances';
 import { getAllQueries } from 'api/queries';
-import { getCurrentUser } from 'api/user';
 import SimpleAreaChart from 'components/charts/SimpleAreaChart';
-import SimpleVerticalBarChart from 'components/charts/SimpleVerticalBarChart';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { NextPage } from 'next';
 import Link from 'next/link';
@@ -17,14 +14,9 @@ const UsersPeak: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector(state => state);
   const dispatch = useAppDispatch();
-  const [selectedId, setSelectedId] = useState(null);
-  const [cpu, setCpu] = useState(true);
-  const [timestamp, setTimestamp] = useState(true);
 
   useEffect(() => {
     const getAllQuery = async (queryTime?: string) => {
-      console.log('query ALL');
-
       await dispatch(getAllQueries({ userId: 'qsldjkqsd', queryTime: queryTime }));
     };
 
@@ -33,17 +25,6 @@ const UsersPeak: NextPage = () => {
       router.push('/login');
     }
   }, []);
-
-  const listOfPerf = [
-    {
-      isActive: cpu,
-      name: 'CPU',
-    },
-    {
-      isActive: timestamp,
-      name: 'Timestamp',
-    },
-  ];
 
   if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (
@@ -90,7 +71,7 @@ const UsersPeak: NextPage = () => {
           </div>
           <div className='flex flex-1 flex-col divide-y divide-gray-300 pt-[5vh]'>
             <div className='flex w-full justify-center mx-auto h-1/2 p-4 border-zinc-800'>
-              <h4 className='p-4'>Pic d'utilisation</h4>
+              <h4 className='p-4'>Pic d&apos;utilisation</h4>
               <div className='flex flex-col z-20 font-mono tracking-widest text-xs w-[550px] 2xl:mx-auto'>
                 <div className='grid gap-y-3 m-10'>
                   <SimpleAreaChart data={state.QueriesReducer.allQueries.data} />
