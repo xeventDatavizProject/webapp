@@ -1,9 +1,7 @@
-import { faker } from '@faker-js/faker';
-import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
-import { FC } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { ArcElement, Chart as ChartJS, Legend, Title, Tooltip } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const dataQueries = [
   {
@@ -38,15 +36,97 @@ const dataQueries = [
       time: 1664055794211,
     },
   },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'blah',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'test',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'root',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
+  {
+    id: '17782UZI',
+    query: "select * from MOCK_DATA where gender='Female'",
+    database_user: 'blah',
+    database_user_id: '29',
+    date_hour: '2022-09-25T20:52:52.794897Z',
+    timestamp: '1664139172',
+    query_time: '0.002682',
+    rows_sent: 53,
+    rows_examined: 100,
+    end_point: {
+      url: 'api/{user_id}/all_queries',
+      method: 'GET',
+      time: 1664055794211,
+    },
+  },
 ];
 
+const sortUsers = () => {
+  let users = [];
+  dataQueries.forEach(query => {
+    if (!users.includes(query.database_user)) {
+      users.push(query.database_user);
+    }
+  });
+  return users;
+};
+
 const data = {
-  labels: dataQueries.map(query => query.query),
+  label: 'Requests by user',
+  labels: sortUsers(),
   datasets: [
     {
       label: 'Requests by user',
-      data: dataQueries.map(query => query.query_time),
-      fill: true,
+      data: sortUsers().map(user => {
+        let count = 0;
+        dataQueries.forEach(query => {
+          if (query.database_user === user) {
+            count++;
+          }
+        });
+        return count;
+      }),
       backgroundColor: [
         'rgba(75, 192, 192, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -66,25 +146,23 @@ const data = {
         'rgb(75, 192, 192)',
       ],
       borderWidth: 1,
+      title: {
+        display: true,
+        text: 'Requests by Users',
+      },
     },
   ],
 };
 
-export const options = {
-  type: 'bar',
-  data,
-  options: {
-    indexAxis: 'y',
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
-
 let UserRequest = () => {
-  return <Bar options={options} data={data} />;
+  return (
+    <div className='bg-black justify-center mx-auto' style={{ width: '350px' }}>
+      <h3 className='text-center' style={{ color: 'grey' }}>
+        Requests by Users
+      </h3>
+      <Doughnut data={data} />
+    </div>
+  );
 };
 
 export default UserRequest;
