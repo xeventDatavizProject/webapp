@@ -11,9 +11,9 @@ const ProfileCard: FC = () => {
         <h1 className='my-8 md:my-8 xl:mt-20 flex flex-col'>
           <span className='tracking-[2px] text-4xl font-large mb-2'>Equipes</span>
         </h1>
-        <div className='grid grid-rows-4 grid-flow-col gap-4'>
+        <div className='grid grid-cols-4 gap-5'>
           {ProfilesList.map((profile, key) => (
-            <div className='block my-8 w-full px-4 flex-1 h-full' key={key}>
+            <div className='grid my-8 w-full px-4 flex-1 h-full border-solid border-white' key={key}>
               <div className='flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 h-2/4'>
                 <Image
                   priority
