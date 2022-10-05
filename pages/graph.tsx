@@ -1,11 +1,13 @@
+import Donuts from 'components/graph/LogChart';
 import { FC } from 'react';
 import Layout from '../components/common/Layout/Layout';
-import Graph from '../components/graph';
 
 const GraphPage: FC = () => {
   return (
     <Layout>
-      <Graph />
+      <div className='container'>
+        <Donuts/>
+      </div>
     </Layout>
   );
 };
