@@ -1,15 +1,9 @@
-import { Chart as ChartJS, ChartData, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js';
+import { ArcElement, Chart as ChartJS, ChartData, Legend, RadialLinearScale, Tooltip } from 'chart.js';
 import { FC, useEffect, useState } from 'react';
-import { Scatter } from 'react-chartjs-2';
+import { PolarArea } from 'react-chartjs-2';
 import ErrorLog from './Mock-error-list';
 
-export const options = {
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-  },
-};
+
 
 const ErrorLogs: FC = () => {
   const data: Date[] = [];
@@ -17,12 +11,12 @@ const ErrorLogs: FC = () => {
 
   const [errorLog, setErrorLog] = useState([])
 
-  ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
+  ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
   useEffect(()=>{
     setErrorLog(errorLog)
 },[errorLog])
 
-  const generateErrorLog = (): ChartData<"scatter"> => {
+  const generateErrorLog = (): ChartData<"polarArea"> => {
    ErrorLog.map((error) => {
       data.push(error.date_hour);
       labels.push(error.query);
@@ -32,10 +26,7 @@ const ErrorLogs: FC = () => {
       datasets: [
         {
           label: "New Confirmed",
-          data: ErrorLog.map( (error) => ({
-            x: data.push(error.date_hour),
-            y: labels.push(error.query),
-          })),
+          data,
           borderColor: [
             "rgba(255, 99, 132, 1)",
             "rgba(54, 162, 235, 1)",
@@ -44,9 +35,14 @@ const ErrorLogs: FC = () => {
             "rgba(153, 102, 255, 1)",
             "rgba(255, 159, 64, 1)",
           ],
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-
-
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)',
+          ],
           borderWidth: 1,
         },
       ],
@@ -54,10 +50,8 @@ const ErrorLogs: FC = () => {
   };
 
   return (
-    <div className='flex flex-row'>
-    <div className=' w-11/12'>
-     <Scatter data={generateErrorLog()} options={options}/>
-    </div>
+    <div>
+     <PolarArea data={generateErrorLog()}/>
     </div>
     );
 };
