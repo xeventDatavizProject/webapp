@@ -105,7 +105,7 @@ const Solution: NextPage = () => {
             </div>
             <h1 className="flex flex-col h-2/4">
               <span className="mx-auto">
-                Période de la journée ou les clients sont plus actifs
+                Période de la journée où les clients sont plus actifs
               </span>
             </h1>
           </div>
@@ -276,7 +276,7 @@ const Solution: NextPage = () => {
             </div>
             <div className="my-8 w-full px-4 flex-1 h-full">
               <h1 className="flex flex-col h-4/6 mb-6 text-lg">
-                <span className="mx-auto">Discorde</span>
+                <span className="mx-auto">Discord</span>
               </h1>
               <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 h-2/4">
                 <Image

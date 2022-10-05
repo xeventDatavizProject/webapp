@@ -24,7 +24,7 @@ const ProfileCard: FC = () => {
                   alt='Data And Settings'
                   style={{
                     color: '#007EFF',
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: 'transparent',
                   }}
                 />
               </div>
