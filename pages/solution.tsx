@@ -219,7 +219,7 @@ const Solution: NextPage = () => {
             </div>
             <div className="my-8 w-full px-4 flex-1 h-full">
               <h1 className="flex flex-col h-4/6 mb-6 text-lg">
-                <span className="mx-auto">Visual studio code</span>
+                <span className="mx-auto">VS code</span>
               </h1>
               <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 h-2/4">
                 <Image

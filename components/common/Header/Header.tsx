@@ -1,12 +1,12 @@
+import { getCurrentUser } from 'api/user';
+import LoginModal from 'components/login/LoginModal/LoginModal';
+import RegisterModal from 'components/register/RegisterModal/RegisterModal';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
-import LoginModal from 'components/login/LoginModal/LoginModal';
-import RegisterModal from 'components/register/RegisterModal/RegisterModal';
-import Button from '../Button';
-import { useAppSelector, useAppDispatch } from 'hooks';
-import { getCurrentUser } from 'api/user';
 import { logoutAuth } from 'store/auth/reducer';
+import Button from '../Button';
 
 const links = [
   { label: 'Why XDA', to: '/why-xda' },
@@ -56,7 +56,7 @@ const Header: FC = () => {
         onClose={() => setShowRegisterModal(false)}
       />
       <header
-        className='overflow-hidden fixed z-50 w-full top-0 flex items-center justify-center'
+        className='overflow-hidden fixed z-50 w-full top-0 flex items-center justify-center overflow-hidden'
         style={{
           // backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.55))`,
           // backgroundRepeat: 'no-repeat',
@@ -83,11 +83,10 @@ const Header: FC = () => {
                       <Link href={link.to} passHref>
                         <a
                           className={`relative text-center
-                      ${
-                        router.pathname === link.to
-                          ? 'font-bold before:absolute before:w-full before:h-px before:bg-white before:-bottom-1'
-                          : ''
-                      }`}
+                      ${router.pathname === link.to
+                              ? 'font-bold before:absolute before:w-full before:h-px before:bg-white before:-bottom-1'
+                              : ''
+                            }`}
                         >
                           {link.label}
                         </a>
