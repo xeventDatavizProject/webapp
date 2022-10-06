@@ -6,7 +6,7 @@ import {
   Legend,
   LinearScale,
   Title,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import Input from "components/common/Input/Input";
 import { FC, useEffect, useState } from "react";
@@ -15,7 +15,7 @@ import { Bar } from "react-chartjs-2";
 const options = {
   plugins: {
     legend: {
-      display: true,
+      display: false,
     },
   },
 };
@@ -88,7 +88,7 @@ const Donuts: FC<logsType> = ({ logs }) => {
       labels,
       datasets: [
         {
-          label: "New Confirmed",
+          label: "Queries",
           data,
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",

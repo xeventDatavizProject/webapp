@@ -4,30 +4,35 @@ import { getCurrentUser } from "api/user";
 import VerticalBarChart from "components/charts/VerticalBarChart";
 import { Title } from "components/common/Typography";
 import Sidebar from "components/dashboard/Sidebar";
-import Donuts from "components/graph/LogChart";
 import Icons from "components/icons";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Donuts from "../components/graph/LogChart";
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector((state) => state);
   const [instances, setInstances] = useState([]);
   const [mostUsedQueries, setMostUsedQueries] = useState([]);
+  const [allQueries, setAllQueries] = useState([]);
   const dispatch = useAppDispatch();
-  const getAllQuery = async (queryTime?: string) => {
-    await dispatch(
-      getAllQueries({ userId: "qsldjkqsd", queryTime: queryTime })
-    );
-  };
+  // const getAllQuery = async (queryTime?: string) => {
+  //   await dispatch(
+  //     getAllQueries({ userId: "qsldjkqsd", queryTime: queryTime })
+  //   );
+  // };
 
   useEffect(() => {
     dispatch(getUserInstances()).then((res) => setInstances(res.payload));
     dispatch(getMostUsedQueries()).then((res) =>
       setMostUsedQueries(res.payload)
     );
+    dispatch(getAllQueries()).then((res) =>
+      setAllQueries(res.payload)
+    );
+
 
     const fetchCurrentUser = async () => {
       const userID = localStorage.getItem("userId");
@@ -39,13 +44,15 @@ const Dashboard: NextPage = () => {
 
     fetchCurrentUser();
     getInstances();
-    getAllQuery();
+    // getAllQuery();
     if (state.AuthReducer.isLoggedIn === false) {
       router.push("/login");
     }
   }, []);
 
-  console.log(mostUsedQueries);
+  //console.log(mostUsedQueries);
+  console.log(allQueries);
+  console.log(state.QueriesReducer.allQueries.data);
 
   if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (

@@ -10,24 +10,42 @@ type AllQueriesParams = {
   databaseUser?: string;
 };
 
-export const getAllQueries = createAsyncThunk(
-  "queries/getAllQueries",
-  async (params: AllQueriesParams) => {
-    const { userId, queryTime, dateHour, databaseUser } = params;
+// export const getAllQueries = createAsyncThunk(
+//   "queries/getAllQueries",
+//   async (params: AllQueriesParams) => {
+//     const { userId, queryTime, dateHour, databaseUser } = params;
 
-    // const response = await axios
-    //   .get(`/api/${userId}/all_queries`, {
-    //     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    //     params: {
-    //       queryTime,
-    //       dateHour,
-    //       databaseUser,
-    //     },
-    //   })
-    //   .then(res => res.data)
-    //   .catch(err => Promise.reject(err.response.data.message ? err.response.data.message : err.message));
+//     // const response = await axios
+//     //   .get(`/api/${userId}/all_queries`, {
+//     //     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+//     //     params: {
+//     //       queryTime,
+//     //       dateHour,
+//     //       databaseUser,
+//     //     },
+//     //   })
+//     //   .then(res => res.data)
+//     //   .catch(err => Promise.reject(err.response.data.message ? err.response.data.message : err.message));
+//     const response = await axios
+//       .get(`/api/queries`)
+//       .then((res) => res.data)
+//       .catch((err) =>
+//         Promise.reject(
+//           err.response.data.message ? err.response.data.message : err.message
+//         )
+//       );
+
+//     return response;
+//   }
+// );
+
+export const getMostUsedQueries = createAsyncThunk(
+  "instances/mostUsedQueries",
+  async () => {
     const response = await axios
-      .get(`/api/queries`)
+      .get(`/api/instances/queries/most-used-queries`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then((res) => res.data)
       .catch((err) =>
         Promise.reject(
@@ -38,12 +56,11 @@ export const getAllQueries = createAsyncThunk(
     return response;
   }
 );
-
-export const getMostUsedQueries = createAsyncThunk(
-  "instances/mostUsedQueries",
+export const getAllQueries = createAsyncThunk(
+  "instances/queries/all-queries",
   async () => {
     const response = await axios
-      .get(`/api/instances/queries/most-used-queries`, {
+      .get(`/api/instances/queries/all-queries`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => res.data)

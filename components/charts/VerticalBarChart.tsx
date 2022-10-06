@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { ChangeEvent, FC, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
@@ -29,8 +28,8 @@ export const options = {
 type VerticalBarParams = { data: QueriesType[] };
 const VerticalBarChart: FC<VerticalBarParams> = ({ data }) => {
   const [currentData, setCurrentData] = useState(data);
-  const [queryLong, setQueryLong] = useState('0.5');
-  const labels = currentData.map(item => item.rows_sent);
+  const [queryLong, setQueryLong] = useState('0');
+  const labels = currentData.map(item => item.query);
   const arrayData = currentData.map(item => parseFloat(item.query_time));
   const dataset = {
     labels,
@@ -64,7 +63,7 @@ const VerticalBarChart: FC<VerticalBarParams> = ({ data }) => {
         className='input block'
         value={queryLong}
         placeholder='Enter duration'
-        step='0.1'
+        step='0.001'
         onChange={e => updateChart(e)}
       />
     </div>
