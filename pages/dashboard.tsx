@@ -76,20 +76,19 @@ const Dashboard: NextPage = () => {
             <UserRequest data={state.QueriesReducer.allQueries.data} />
             <PeakUsage data={state.QueriesReducer.allQueries.data} />
           </div>
-        </div>
-        <div className="card w-full">
-          <div className="card__content">
-            <Title as="h2" size="subtitle">
-              Request too long
-            </Title>
-            {/* <VerticalBarChart data={state.QueriesReducer.allQueries.data} /> */}
-            <Donuts logs={mostUsedQueries} />
-          </div>
           <div className="grid grid-cols-2 gap-8 items-start">
             <div>
               <LongRequests data={state.QueriesReducer.allQueries.data} />
             </div>
             <ErrorLogs />
+          </div>
+          <div className="card w-full mt-8">
+            <div className="card__content">
+              <Title as="h2" size="subtitle">
+                Request too long
+              </Title>
+              <Donuts logs={mostUsedQueries} />
+            </div>
           </div>
         </div>
       </section>

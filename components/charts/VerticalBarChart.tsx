@@ -2,15 +2,13 @@ import {
   BarElement,
   CategoryScale,
   Chart as ChartJS,
-  ChartData,
   Legend,
   LinearScale,
   Title,
   Tooltip,
 } from "chart.js";
-import { ChangeEvent, FC, useState } from "react";
+import { FC } from "react";
 import { Bar } from "react-chartjs-2";
-import { QueriesType } from "store";
 
 ChartJS.register(
   CategoryScale,
