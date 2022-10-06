@@ -1,17 +1,20 @@
 import {
   ArcElement,
-  Chart as ChartJS,
-  ChartData,
-  Legend,
+  Chart as ChartJS, Legend,
   RadialLinearScale,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import { Paragraph, Title } from "components/common/Typography";
-import { FC, useEffect, useState } from "react";
-import ErrorLog from "./Mock-error-list";
+import { FC } from "react";
+import { QueriesType } from "store";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
-const ErrorLogs: FC = () => {
+
+type ErrorQueriesParams = {
+  data: QueriesType[];
+};
+
+const ErrorLogs: FC<ErrorQueriesParams> = ({ data }) => {
   // const data: Date[] = [];
   // const labels: string[] = [];
   // const [errorLog, setErrorLog] = useState([]);
@@ -63,7 +66,7 @@ const ErrorLogs: FC = () => {
           Error logs
         </Title>
         <ul>
-          {ErrorLog.map((item, idx) => {
+          {ErrorLogs.map((item, idx) => {
             const date = new Date(item.date_hour);
             const renderDate = `${formatDecimal(date.getDate())}/
             ${formatDecimal(date.getMonth())}/${date.getFullYear()}`;

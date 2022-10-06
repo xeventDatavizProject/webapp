@@ -73,3 +73,21 @@ export const getAllQueries = createAsyncThunk(
     return response;
   }
 );
+
+export const getErrorQueries = createAsyncThunk(
+  "instances/queries/error-queries",
+  async () => {
+    const response = await axios
+      .get(`/api/instances/queries/error-queries`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => res.data)
+      .catch((err) =>
+        Promise.reject(
+          err.response.data.message ? err.response.data.message : err.message
+        )
+      );
+
+    return response;
+  }
+);

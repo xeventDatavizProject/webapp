@@ -1,5 +1,5 @@
 import { getAllInstances, getUserInstances } from "api/instances";
-import { getAllQueries, getMostUsedQueries } from "api/queries";
+import { getAllQueries, getErrorQueries, getMostUsedQueries } from "api/queries";
 import { getCurrentUser } from "api/user";
 import UserRequest from "components/charts/UserRequest";
 import Accordion from "components/common/Accordion/Accordion";
@@ -40,6 +40,7 @@ const Dashboard: NextPage = () => {
   const [instances, setInstances] = useState([]);
   const [mostUsedQueries, setMostUsedQueries] = useState([]);
   const [allQueries, setAllQueries] = useState([]);
+  const [errorQueries, setErrorQueries] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
@@ -55,6 +56,7 @@ const Dashboard: NextPage = () => {
       setMostUsedQueries(res.payload)
     );
     dispatch(getAllQueries()).then((res) => setAllQueries(res.payload));
+    dispatch(getErrorQueries()).then((res) => setErrorQueries(res.payload));
 
     const fetchCurrentUser = async () => {
       const userID = localStorage.getItem("userId");
@@ -73,8 +75,9 @@ const Dashboard: NextPage = () => {
   }, []);
 
   //console.log(mostUsedQueries);
-  console.log(allQueries);
-  console.log(state.QueriesReducer.allQueries.data);
+  //console.log(allQueries);
+  //console.log(state.QueriesReducer.allQueries.data);
+  console.log(errorQueries);
 
   if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (
@@ -97,19 +100,17 @@ const Dashboard: NextPage = () => {
             >
               <span
                 className={`absolute left-0 transform w-full h-[2px]  transition-transform
-              ${
-                isSidebarOpen
-                  ? "rotate-45 translate-y-0 bg-white"
-                  : "translate-y-1 bg-blue-primary"
-              }`}
+              ${isSidebarOpen
+                    ? "rotate-45 translate-y-0 bg-white"
+                    : "translate-y-1 bg-blue-primary"
+                  }`}
               />
               <span
                 className={`absolute left-0 transform w-full h-[2px] bg-black transition-transform
-              ${
-                isSidebarOpen
-                  ? "-rotate-45 translate-y-0 bg-white"
-                  : "-translate-y-1 bg-blue-primary"
-              }`}
+              ${isSidebarOpen
+                    ? "-rotate-45 translate-y-0 bg-white"
+                    : "-translate-y-1 bg-blue-primary"
+                  }`}
               />
             </button>
           </div>
@@ -154,7 +155,7 @@ const Dashboard: NextPage = () => {
             <div>
               <LongRequests data={state.QueriesReducer.allQueries.data} />
             </div>
-            <ErrorLogs />
+            <ErrorLogs data={state.QueriesReducer.errorQueries.data} />
           </div>
           <div className="card w-full mt-8">
             <div className="card__content">
