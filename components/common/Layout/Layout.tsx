@@ -11,7 +11,6 @@ const bgImage = "/assets/images/bg.png";
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div
-      className=""
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95)), url(${bgImage})`,
         backgroundRepeat: "no-repeat",
@@ -21,7 +20,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       }}
     >
       <Header />
-      <main className="pt-[124px] pb-24 min-h-screen">{children}</main>
+      <main className="pt-[124px] min-h-[95vh]">{children}</main>
       <Footer />
     </div>
   );

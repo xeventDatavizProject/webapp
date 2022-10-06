@@ -1,4 +1,3 @@
-
 import { getCurrentUser } from "api/user";
 import LoginModal from "components/login/LoginModal/LoginModal";
 import RegisterModal from "components/register/RegisterModal/RegisterModal";
@@ -14,7 +13,6 @@ const links = [
   { label: "Solution", to: "/solution" },
   { label: "Docs", to: "/documentation" },
   { label: "Pricing", to: "/pricing" },
-  { label: "Graph", to: "/graph" },
   { label: "Dashboard", to: "/dashboard", protected: true },
 ];
 
