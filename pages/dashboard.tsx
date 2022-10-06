@@ -1,5 +1,5 @@
 import { getAllInstances, getUserInstances } from "api/instances";
-import { getMostUsedQueries } from "api/queries";
+import { getAllQueries, getMostUsedQueries } from "api/queries";
 import { getCurrentUser } from "api/user";
 import UserRequest from "components/charts/UserRequest";
 import Accordion from "components/common/Accordion/Accordion";
@@ -54,7 +54,7 @@ const Dashboard: NextPage = () => {
     dispatch(getMostUsedQueries()).then((res) =>
       setMostUsedQueries(res.payload)
     );
-    // dispatch(getAllQueries()).then((res) => setAllQueries(res.payload));
+    dispatch(getAllQueries()).then((res) => setAllQueries(res.payload));
 
     const fetchCurrentUser = async () => {
       const userID = localStorage.getItem("userId");
@@ -71,6 +71,10 @@ const Dashboard: NextPage = () => {
       router.push("/login");
     }
   }, []);
+
+  //console.log(mostUsedQueries);
+  console.log(allQueries);
+  console.log(state.QueriesReducer.allQueries.data);
 
   if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (
