@@ -25,8 +25,11 @@ const ProfileCard: FC = () => {
                   className=" bg-transparent"
                   height={100}
                   width={100}
-                  objectFit="contain"
-                  alt="photo"
+                  alt="Data And Settings"
+                  style={{
+                    color: "#007EFF",
+                    backgroundColor: "transparent",
+                  }}
                 />
               </div>
               <h1 className="flex flex-col  justify-center h-4/6 mb-6 text-lg">

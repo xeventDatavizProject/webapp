@@ -1,12 +1,12 @@
 export const ProfilesList = [
     {
-        name: 'N DOLO-NZAMBA Merith-Magni',
+        name: 'N DOLO Merith',
         job: 'Développeur FullStack',
         linkedin: 'https://www.linkedin.com/in/filoupatir-hanna-33727b17a/'
     },
     {
         name: 'HANNA Filoupatir',
-        job: 'Développeur BackEnd',
+        job: 'Développeur FullStack',
         linkedin: 'https://www.linkedin.com/in/filoupatir-hanna-33727b17a/'
     },
     {

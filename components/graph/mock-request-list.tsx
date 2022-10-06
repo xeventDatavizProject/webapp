@@ -1,56 +1,48 @@
-import { Request } from './request';
-
-const Logs: Request[] = [
+const Logs = [
   {
-    id: '17782UGG',
-    query: 'select',
+    query: "select",
     times_called: 200,
   },
   {
-    id: '17782UGG',
-    query: 'insert',
+    query: "insert",
     times_called: 200,
   },
   {
-    id: '17782UGG',
-    query: 'insert',
+    query: "insert",
     times_called: 200,
   },
   {
-    id: '17782UGG',
-    query: 'select * from dataBase',
+    query: "select * from dataBase",
     times_called: 120,
   },
   {
-    id: '17782UGG',
-    query: 'select * from user',
+    query: "select * from user",
     times_called: 100,
   },
   {
-    id: '17782UNI',
-    query: 'show',
+    id: "17782UNI",
+    query: "show",
     times_called: 180,
   },
   {
-    id: '17782UNI',
-    query: 'update',
+    id: "17782UNI",
+    query: "update",
     times_called: 90,
   },
   {
-    id: '17782UNI',
-    query: 'delete',
+    id: "17782UNI",
+    query: "delete",
     times_called: 60,
   },
   {
-    id: '17782UNI',
-    query: 'delete from user',
+    id: "17782UNI",
+    query: "delete from user",
     times_called: 20,
   },
   {
-    id: '17782U6I',
-    query: 'alter',
+    id: "17782U6I",
+    query: "alter",
     times_called: 20,
   },
 ];
 export default Logs;
-
