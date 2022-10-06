@@ -1,26 +1,26 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { FC, useEffect, useState } from 'react';
-import LoginModal from 'components/login/LoginModal/LoginModal';
-import RegisterModal from 'components/register/RegisterModal/RegisterModal';
-import Button from '../Button';
-import { useAppSelector, useAppDispatch } from 'hooks';
-import { getCurrentUser } from 'api/user';
-import { logoutAuth } from 'store/auth/reducer';
+import { getCurrentUser } from "api/user";
+import LoginModal from "components/login/LoginModal/LoginModal";
+import RegisterModal from "components/register/RegisterModal/RegisterModal";
+import { useAppDispatch, useAppSelector } from "hooks";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { FC, useEffect, useState } from "react";
+import { logoutAuth } from "store/auth/reducer";
+import Button from "../Button";
 
 const links = [
-  { label: 'Why XDA', to: '/why-xda' },
-  { label: 'Solution', to: '/solution' },
-  { label: 'Docs', to: '/documentation' },
-  { label: 'Pricing', to: '/pricing' },
-  { label: 'Graph', to: '/graph' },
-  { label: 'Dashboard', to: '/dashboard', protected: true },
+  { label: "Why XDA", to: "/why-xda" },
+  { label: "Solution", to: "/solution" },
+  { label: "Docs", to: "/documentation" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Graph", to: "/graph" },
+  { label: "Dashboard", to: "/dashboard", protected: true },
 ];
 
 const Header: FC = () => {
   const router = useRouter();
-  const authState = useAppSelector(state => state.AuthReducer);
-  const usersState = useAppSelector(state => state.UsersReducer);
+  const authState = useAppSelector((state) => state.AuthReducer);
+  const usersState = useAppSelector((state) => state.UsersReducer);
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -30,12 +30,26 @@ const Header: FC = () => {
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
-      const userID = localStorage.getItem('userId');
+      const userID = localStorage.getItem("userId");
       userID && (await dispatch(getCurrentUser(userID)));
     };
 
     fetchCurrentUser();
   }, []);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (isOpen && window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -56,26 +70,50 @@ const Header: FC = () => {
         onClose={() => setShowRegisterModal(false)}
       />
       <header
-        className='overflow-hidden fixed z-50 w-full top-0 flex items-center justify-center'
+        className="overflow-hidden fixed z-50 w-full top-0 flex items-center justify-center"
         style={{
-          // backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.55))`,
-          // backgroundRepeat: 'no-repeat',
-          backgroundSize: '100%',
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95))`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
         }}
       >
-        <div className='py-4 lg:py-8 container w-full flex justify-between items-center'>
-          <div className='hover:cursor-pointer'>
-            <Link href='/' passHref>
-              <span className='font-bold text-4xl font-poppins'>XDA</span>
+        <div className="py-4 lg:py-8 container w-full flex justify-between items-center">
+          <div className="hover:cursor-pointer">
+            <Link href="/" passHref>
+              <span className="font-bold text-4xl font-poppins">XDA</span>
             </Link>
           </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="menu"
+            className="xl:hidden relative w-8 h-6 z-[60]"
+          >
+            <span
+              className={`absolute left-0 transform w-full h-[2px]  transition-transform
+              ${
+                isOpen
+                  ? "rotate-45 translate-y-0 bg-white"
+                  : "translate-y-1 bg-blue-300"
+              }`}
+            />
+            <span
+              className={`absolute left-0 transform w-full h-[2px] bg-blue-300 transition-transform
+              ${
+                isOpen
+                  ? "-rotate-45 translate-y-0 bg-white"
+                  : "-translate-y-1 bg-black"
+              }`}
+            />
+          </button>
           <div
-            className={`fixed xl:static left-full bg-blackish-primary transform transition-transform xl:transition-none duration-300 overflow-y-auto overscroll-y-contain xl:overflow-y-visible p-4 xl:p-0 xl:bg-transparent z-50
-            `}
+            className={`fixed xl:static left-full bg-black-primary transform transition-transform xl:transition-none duration-300 overflow-y-auto overscroll-y-contain xl:overflow-y-visible p-4 xl:p-0 xl:bg-transparent z-50
+            ${isOpen ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
           >
             {/* ${isOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0'}  */}
-            <div className='m-auto flex flex-col xl:flex-row justify-center items-center'>
-              <ul className='flex flex-col xl:flex-row justify-center items-center space-y-6 xl:space-y-0 xl:space-x-8'>
+            <div className="m-auto flex flex-col xl:flex-row justify-center items-center">
+              <ul className="flex flex-col xl:flex-row justify-center items-center space-y-6 xl:space-y-0 xl:space-x-8">
                 {links.map((link, index) => {
                   if (link.protected && !authState.isLoggedIn) return null;
                   return (
@@ -85,8 +123,8 @@ const Header: FC = () => {
                           className={`relative text-center
                       ${
                         router.pathname === link.to
-                          ? 'font-bold before:absolute before:w-full before:h-px before:bg-white before:-bottom-1'
-                          : ''
+                          ? "font-bold before:absolute before:w-full before:h-px before:bg-white before:-bottom-1"
+                          : ""
                       }`}
                         >
                           {link.label}
@@ -97,34 +135,14 @@ const Header: FC = () => {
                 })}
               </ul>
               {authState.isLoggedIn ? (
-                <Button onClick={logout} className='ml-10'>
+                <Button onClick={logout} className="ml-10">
                   Logout
                 </Button>
               ) : (
-                <Button href='/login' className='ml-10'>
+                <Button href="/login" className="ml-10">
                   Login
                 </Button>
               )}
-              {/* <div className='mt-20 xl:mt-0 xl:flex-1 flex justify-end items-center space-x-4'>
-                <>
-                  <Button.Outline
-                    onClick={() => {
-                      setShowLoginModal(true);
-                      setIsOpen(false);
-                    }}
-                  >
-                    Login
-                  </Button.Outline>
-                  <Button
-                    onClick={() => {
-                      setShowRegisterModal(true);
-                      setIsOpen(false);
-                    }}
-                  >
-                    Register
-                  </Button>
-                </>
-              </div> */}
             </div>
           </div>
         </div>

@@ -1,0 +1,34 @@
+.cross {
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  top: 0;
+  right: 0;
+  @screen md {
+    top: 50%;
+    transform: translateY(-100%);
+  }
+}
+
+.crossBottom,
+.crossTop {
+  width: 1rem;
+  height: 3px;
+  @apply bg-white;
+  position: absolute;
+  top: 11px;
+  left: 4px;
+}
+
+.crossBottom {
+  transform: rotate(90deg);
+}
+
+.crossOpen {
+  .crossBottom {
+    transform: rotate(45deg);
+  }
+  .crossTop {
+    transform: rotate(-45deg);
+  }
+}
