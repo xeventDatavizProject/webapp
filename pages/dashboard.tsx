@@ -35,6 +35,7 @@ const Dashboard: NextPage = () => {
   const [instances, setInstances] = useState([]);
   const [mostUsedQueries, setMostUsedQueries] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
   const getAllQuery = async (queryTime?: string) => {
     await dispatch(
@@ -66,27 +67,44 @@ const Dashboard: NextPage = () => {
 
   console.log(mostUsedQueries);
 
-  useEffect(() => {
-    const onResize = () => {
-      if (isOpen && window.innerWidth >= 1024) {
-        setIsOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isOpen]);
-
   if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (
     <div className="w-full flex bg-white text-black-primary">
-      <Sidebar instances={instances} />
+      <div
+        className={`fixed w-fit inset-0 bg-black-primary transform transition-transform  duration-300 overflow-y-auto overscroll-y-contain pt-20 p-4 xl:p-0 z-50
+        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <Sidebar instances={instances} />
+      </div>
+
       <section className="flex-1 p-8">
         <div className="flex justify-between items-center mb-8">
-          <Title>Dashboard</Title>
+          <div>
+            <Title>Dashboard</Title>
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label="sidebar"
+              className="relative w-8 h-6 z-[60]"
+            >
+              <span
+                className={`absolute left-0 transform w-full h-[2px]  transition-transform
+              ${
+                isSidebarOpen
+                  ? "rotate-45 translate-y-0 bg-white"
+                  : "translate-y-1 bg-blue-primary"
+              }`}
+              />
+              <span
+                className={`absolute left-0 transform w-full h-[2px] bg-black transition-transform
+              ${
+                isSidebarOpen
+                  ? "-rotate-45 translate-y-0 bg-white"
+                  : "-translate-y-1 bg-blue-primary"
+              }`}
+              />
+            </button>
+          </div>
+
           <ul className="flex items-center">
             <li className="mr-4">
               <Icons.Refresh />
@@ -98,7 +116,7 @@ const Dashboard: NextPage = () => {
               />
               <div
                 className={`fixed right-0 top-0 bottom-0 bg-black-primary text-white w-1/5 transform transition-transform  duration-300 overflow-y-auto overscroll-y-contain pt-10 p-4 z-50
-            ${isOpen ? "translate-x-full" : "translate-x-0"}`}
+            ${isOpen ? "-translate-y-full" : "translate-y-0"}`}
               >
                 <div className="flex justify-between mb-20">
                   <span>Notifications List</span>

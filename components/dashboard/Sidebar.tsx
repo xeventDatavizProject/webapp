@@ -37,11 +37,14 @@ const Sidebar: FC<InstanceArray> = ({ instances }) => {
 
   return (
     <section className="py-6 px-4 bg-blue-primary min-h-screen text-white flex flex-col w-[320px]">
-      <Link href="/" passHref>
-        <span className="font-bold text-3xl font-poppins cursor-pointer">
-          XDA
-        </span>
-      </Link>
+      <div className="ml-auto mt-10 items-end">
+        <Link href="/" passHref>
+          <span className="font-bold text-3xl font-poppins cursor-pointer">
+            XDA
+          </span>
+        </Link>
+      </div>
+
       <div className="mt-8">
         <Paragraph size="lg" className="font-bold">
           Instances
