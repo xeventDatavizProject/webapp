@@ -12,7 +12,7 @@ const ProfileCard: FC = () => {
             Equipes
           </span>
         </h1>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 md:gap-4 max-w-5xl mx-auto px-5 mb-12 md:mb-20">
           {ProfilesList.map((profile, key) => (
             <div
               className="grid my-8 w-full px-4 flex-1 h-full border-solid border-white bg-slate-500 rounded-2xl "

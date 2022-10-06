@@ -22,7 +22,7 @@ const Header: FC = () => {
   const authState = useAppSelector((state) => state.AuthReducer);
   const usersState = useAppSelector((state) => state.UsersReducer);
   const dispatch = useAppDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isHeaderOpen, setIsHeaderOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -39,8 +39,8 @@ const Header: FC = () => {
 
   useEffect(() => {
     const onResize = () => {
-      if (isOpen && window.innerWidth >= 1024) {
-        setIsOpen(false);
+      if (isHeaderOpen && window.innerWidth >= 1024) {
+        setIsHeaderOpen(false);
       }
     };
 
@@ -49,7 +49,7 @@ const Header: FC = () => {
     return () => {
       window.removeEventListener("resize", onResize);
     };
-  }, [isOpen]);
+  }, [isHeaderOpen]);
 
   return (
     <>
@@ -86,32 +86,35 @@ const Header: FC = () => {
             </Link>
           </div>
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsHeaderOpen(!isHeaderOpen)}
             aria-label="menu"
             className="xl:hidden relative w-8 h-6 z-[60]"
           >
             <span
               className={`absolute left-0 transform w-full h-[2px]  transition-transform
               ${
-                isOpen
-                  ? "rotate-45 translate-y-0 bg-white"
-                  : "translate-y-1 bg-blue-300"
+                isHeaderOpen
+                  ? "rotate-45 translate-y-0 bg-blue-primary"
+                  : "translate-y-1 bg-blue-primary"
               }`}
             />
             <span
-              className={`absolute left-0 transform w-full h-[2px] bg-blue-300 transition-transform
+              className={`absolute left-0 transform w-full h-[2px] bg-blue-primary transition-transform
               ${
-                isOpen
-                  ? "-rotate-45 translate-y-0 bg-white"
-                  : "-translate-y-1 bg-black"
+                isHeaderOpen
+                  ? "-rotate-45 translate-y-0 bg-blue-primary"
+                  : "-translate-y-1 bg-blue-primary"
               }`}
             />
           </button>
           <div
-            className={`fixed xl:static left-full bg-black-primary transform transition-transform xl:transition-none duration-300 overflow-y-auto overscroll-y-contain xl:overflow-y-visible p-4 xl:p-0 xl:bg-transparent z-50
-            ${isOpen ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+            className={`fixed inset-0 bg-[#000] transform transition-transform xl:transition-none duration-300 overflow-y-auto overscroll-y-contain xl:overflow-y-visible pt-20 p-4 xl:p-0 xl:relative xl:bg-transparent z-50
+            ${
+              isHeaderOpen
+                ? "translate-x-0"
+                : "-translate-x-full xl:translate-x-0"
+            }`}
           >
-            {/* ${isOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0'}  */}
             <div className="m-auto flex flex-col xl:flex-row justify-center items-center">
               <ul className="flex flex-col xl:flex-row justify-center items-center space-y-6 xl:space-y-0 xl:space-x-8">
                 {links.map((link, index) => {
@@ -135,11 +138,11 @@ const Header: FC = () => {
                 })}
               </ul>
               {authState.isLoggedIn ? (
-                <Button onClick={logout} className="ml-10">
+                <Button onClick={logout} className="md:ml-10 mt-24 md:mt-0">
                   Logout
                 </Button>
               ) : (
-                <Button href="/login" className="ml-10">
+                <Button href="/login" className="md:ml-10 mt-24 md:mt-0">
                   Login
                 </Button>
               )}
