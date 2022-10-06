@@ -1,14 +1,18 @@
+import { useEffect, useState } from "react";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { getAllInstances, getUserInstances } from "api/instances";
 import { getAllQueries } from "api/queries";
 import { getCurrentUser } from "api/user";
-import VerticalBarChart from "components/charts/VerticalBarChart";
+import UserRequest from "components/charts/UserRequest";
 import { Title } from "components/common/Typography";
+import LongRequests from "components/dashboard/LongRequests";
+import PeakUsage from "components/dashboard/PeakUsage";
 import Sidebar from "components/dashboard/Sidebar";
+import ErrorLogs from "components/graph/ErrorChart";
 import Icons from "components/icons";
 import { useAppDispatch, useAppSelector } from "hooks";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import ChartsDoughnut from "./Charts/Doughnut/doughnut";
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
@@ -44,8 +48,8 @@ const Dashboard: NextPage = () => {
   return (
     <div className="w-full flex bg-white text-black-primary">
       <Sidebar instances={instances} />
-      <section className="flex-1 p-8">
-        <div className="flex justify-between items-center mb-8">
+      <section className="flex-1 overflow-y-auto h-screen bg-gray-50">
+        <div className="flex justify-between items-center bg-white px-8 py-6">
           <Title>Dashboard</Title>
           <ul className="flex items-center">
             <li className="mr-4">
@@ -56,31 +60,17 @@ const Dashboard: NextPage = () => {
             </li>
           </ul>
         </div>
-
-        <div className="card w-full">
-          <div className="card__content">
-            <Title as="h2" size="subtitle">
-              Request too long
-            </Title>
-            <VerticalBarChart data={state.QueriesReducer.allQueries.data} />
+        <div className="p-8">
+          <div className="grid grid-cols-[0.5fr_1fr] gap-8 mb-8">
+            <UserRequest />
+            <PeakUsage data={state.QueriesReducer.allQueries.data} />
           </div>
-
-          {/* <div className='card__footer'>
+          <div className="grid grid-cols-2 gap-8 items-start">
             <div>
-              <input
-                type='number'
-                className='input block'
-                value={queryLong}
-                placeholder='Enter duration'
-                step='0.1'
-                onChange={e => {
-                  setQueryLong(e.target.value);
-                  getAllQuery(e.target.value);
-                }}
-              />
+              <LongRequests data={state.QueriesReducer.allQueries.data} />
             </div>
-            <div></div>
-          </div> */}
+            <ErrorLogs />
+          </div>
         </div>
       </section>
     </div>
