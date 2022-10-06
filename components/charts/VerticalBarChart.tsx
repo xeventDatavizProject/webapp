@@ -1,4 +1,3 @@
-import { FC } from "react";
 import {
   BarElement,
   CategoryScale,
@@ -9,7 +8,9 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
+import { ChangeEvent, FC, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { QueriesType } from "store";
 
 ChartJS.register(
   CategoryScale,
@@ -40,9 +41,28 @@ export const options = {
   },
 };
 
-type VerticalBarParams = { data: ChartData<any> };
-const VerticalBarChart: FC<VerticalBarParams> = ({ data }) => {
-  return <Bar options={options} data={data} />;
+type VerticalBarParams = { labels: string[]; data: number[] };
+const VerticalBarChart: FC<VerticalBarParams> = ({ labels, data }) => {
+  const dataset = {
+    labels,
+    datasets: [
+      {
+        label: "Time in seconds",
+        data: data,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(255, 159, 64, 0.5)",
+          "rgba(255, 205, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(153, 102, 255, 0.5)",
+          "rgba(201, 203, 207, 0.5)",
+        ],
+      },
+    ],
+  };
+
+  return <Bar options={options} data={dataset} />;
 };
 
 export default VerticalBarChart;

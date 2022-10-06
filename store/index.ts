@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import AuthReducer from './auth/reducer';
-import UsersReducer from './users/reducer';
 import InstancesReducer from './instances/reducer';
 import QueriesReducer from './queries/reducer';
+import UsersReducer from './users/reducer';
 
 export const Store = configureStore({
   reducer: {
@@ -32,9 +32,4 @@ export type QueriesType = {
   query_time: string;
   rows_sent: number;
   rows_examined: number;
-  end_point: {
-    url: string;
-    method: string;
-    time: number;
-  };
 };

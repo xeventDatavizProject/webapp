@@ -1,3 +1,4 @@
+import { activeGlobal } from "api/instances";
 import { Paragraph } from "components/common/Typography";
 import Icons from "components/icons";
 import { useAppDispatch, useAppSelector } from "hooks";
@@ -12,6 +13,7 @@ export type instanceType = {
   instancePort: string;
   hostname: string;
   instancePassword: string;
+  globalActivate: string;
 };
 
 export type InstanceArray = {
@@ -27,8 +29,14 @@ const Sidebar: FC<InstanceArray> = ({ instances }) => {
     router.push("/");
   };
 
+  const activateGlobal = async () => {
+    await dispatch(activeGlobal(instances[0].id)).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
-    <section className="py-6 px-4 bg-blue-primary min-h-screen text-white flex flex-col w-[320px] h-screen">
+    <section className="py-6 px-4 bg-blue-primary min-h-screen text-white flex flex-col w-[320px]">
       <Link href="/" passHref>
         <span className="font-bold text-3xl font-poppins cursor-pointer">
           XDA
@@ -51,9 +59,19 @@ const Sidebar: FC<InstanceArray> = ({ instances }) => {
                 </div>
                 <div className="flex flex-col justify-end  items-end">
                   <Icons.Settings />
-                  <button className=" text-blue-primary mt-auto">
-                    Active global
-                  </button>
+                  {instance.globalActivate ? (
+                    <div className=" text-teal-400 mt-auto flex flex-row items-center space-x-2">
+                      <span>Activated</span>
+                      <div className=" bg-green-500 w-2 h-2 rounded-full" />
+                    </div>
+                  ) : (
+                    <button
+                      className=" text-blue-primary mt-auto"
+                      onClick={activateGlobal}
+                    >
+                      Active global
+                    </button>
+                  )}
                 </div>
               </li>
             ))}
