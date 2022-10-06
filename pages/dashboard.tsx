@@ -1,9 +1,10 @@
 import { getAllInstances, getUserInstances } from "api/instances";
-import { getAllQueries } from "api/queries";
+import { getAllQueries, getMostUsedQueries } from "api/queries";
 import { getCurrentUser } from "api/user";
 import VerticalBarChart from "components/charts/VerticalBarChart";
 import { Title } from "components/common/Typography";
 import Sidebar from "components/dashboard/Sidebar";
+import Donuts from "components/graph/LogChart";
 import Icons from "components/icons";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { NextPage } from "next";
@@ -14,6 +15,7 @@ const Dashboard: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector((state) => state);
   const [instances, setInstances] = useState([]);
+  const [mostUsedQueries, setMostUsedQueries] = useState([]);
   const dispatch = useAppDispatch();
   const getAllQuery = async (queryTime?: string) => {
     await dispatch(
@@ -23,6 +25,9 @@ const Dashboard: NextPage = () => {
 
   useEffect(() => {
     dispatch(getUserInstances()).then((res) => setInstances(res.payload));
+    dispatch(getMostUsedQueries()).then((res) =>
+      setMostUsedQueries(res.payload)
+    );
 
     const fetchCurrentUser = async () => {
       const userID = localStorage.getItem("userId");
@@ -39,6 +44,8 @@ const Dashboard: NextPage = () => {
       router.push("/login");
     }
   }, []);
+
+  console.log(mostUsedQueries);
 
   if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
   return (
@@ -63,6 +70,7 @@ const Dashboard: NextPage = () => {
               Request too long
             </Title>
             <VerticalBarChart data={state.QueriesReducer.allQueries.data} />
+            <Donuts logs={mostUsedQueries} />
           </div>
 
           {/* <div className='card__footer'>
