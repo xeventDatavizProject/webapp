@@ -12,7 +12,7 @@ const ProfileCard: FC = () => {
             Equipes
           </span>
         </h1>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 md:gap-4 max-w-5xl mx-auto px-5 mb-12 md:mb-20">
           {ProfilesList.map((profile, key) => (
             <div
               className="grid my-8 w-full px-4 flex-1 h-full border-solid border-white bg-blue-200 bg-opacity-40 rounded-2xl "
@@ -25,8 +25,11 @@ const ProfileCard: FC = () => {
                   className=" bg-transparent rounded-full"
                   height={100}
                   width={100}
-                  objectFit="contain"
-                  alt="photo"
+                  alt="Data And Settings"
+                  style={{
+                    color: "#007EFF",
+                    backgroundColor: "transparent",
+                  }}
                 />
               </div>
               <h1 className="flex flex-col  justify-center h-4/6 mb-6 text-lg">

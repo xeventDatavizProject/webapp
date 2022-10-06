@@ -53,9 +53,13 @@ export const activeGlobal = createAsyncThunk(
   "instances/activeGlobal",
   async (instanceId: string) => {
     const response = await axios
-      .get(`/api/instances/${instanceId}/active-global`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
+      .post(
+        `/api/instances/${instanceId}/activate-global`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      )
       .then((res) => res.data)
       .catch((err) =>
         Promise.reject(
