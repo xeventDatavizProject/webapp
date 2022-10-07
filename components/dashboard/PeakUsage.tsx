@@ -17,7 +17,9 @@ const PeakUsage: FC<PeakUsageParams> = ({ data }) => {
     [key: string]: number;
   } | null>(null);
   const formatDate = (date: Date) => {
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth()).padStart(2, "0");
+    return `${day}/${month}/${date.getFullYear()}`;
   };
 
   useEffect(() => {
