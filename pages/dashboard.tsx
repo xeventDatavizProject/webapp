@@ -155,7 +155,7 @@ const Dashboard: NextPage = () => {
             <div>
               <LongRequests data={state.QueriesReducer.allQueries.data} />
             </div>
-            <ErrorLogs data={state.QueriesReducer.errorQueries.data} />
+            <ErrorLogs data={errorQueries} />
           </div>
           <div className="card w-full mt-8">
             <div className="card__content">

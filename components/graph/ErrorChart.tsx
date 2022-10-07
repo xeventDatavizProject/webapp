@@ -15,46 +15,6 @@ type ErrorQueriesParams = {
 };
 
 const ErrorLogs: FC<ErrorQueriesParams> = ({ data }) => {
-  // const data: Date[] = [];
-  // const labels: string[] = [];
-  // const [errorLog, setErrorLog] = useState([]);
-
-  // useEffect(() => {
-  //   setErrorLog(errorLog);
-  // }, [errorLog]);
-
-  // const generateErrorLog = (): ChartData<"polarArea"> => {
-  //   ErrorLog.map((error) => {
-  //     data.push(error.date_hour);
-  //     labels.push(error.query);
-  //   });
-  //   return {
-  //     labels,
-  //     datasets: [
-  //       {
-  //         label: "New Confirmed",
-  //         data,
-  //         borderColor: [
-  //           "rgba(255, 99, 132, 1)",
-  //           "rgba(54, 162, 235, 1)",
-  //           "rgba(255, 206, 86, 1)",
-  //           "rgba(75, 192, 192, 1)",
-  //           "rgba(153, 102, 255, 1)",
-  //           "rgba(255, 159, 64, 1)",
-  //         ],
-  //         backgroundColor: [
-  //           "rgba(255, 99, 132, 0.5)",
-  //           "rgba(54, 162, 235, 0.5)",
-  //           "rgba(255, 206, 86, 0.5)",
-  //           "rgba(75, 192, 192, 0.5)",
-  //           "rgba(153, 102, 255, 0.5)",
-  //           "rgba(255, 159, 64, 0.5)",
-  //         ],
-  //         borderWidth: 1,
-  //       },
-  //     ],
-  //   };
-  // };
   const formatDecimal = (value: any) => {
     return String(value).padStart(2, "0");
   };
@@ -66,7 +26,7 @@ const ErrorLogs: FC<ErrorQueriesParams> = ({ data }) => {
           Error logs
         </Title>
         <ul>
-          {ErrorLogs.map((item, idx) => {
+          {data.map((item, idx) => {
             const date = new Date(item.date_hour);
             const renderDate = `${formatDecimal(date.getDate())}/
             ${formatDecimal(date.getMonth())}/${date.getFullYear()}`;
@@ -93,7 +53,6 @@ const ErrorLogs: FC<ErrorQueriesParams> = ({ data }) => {
             );
           })}
         </ul>
-        {/* <PolarArea data={generateErrorLog()} /> */}
       </div>
     </div>
   );
