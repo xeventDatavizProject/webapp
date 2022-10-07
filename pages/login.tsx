@@ -9,8 +9,9 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { setAuthLogged } from "store/auth/reducer";
+import { resetErrors, setAuthLogged } from "store/auth/reducer";
 import * as Yup from "yup";
 
 const schema = Yup.object({
@@ -47,13 +48,11 @@ const Login: NextPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   state.isLoggedIn && router.push('/dashboard');
-
-  //   return () => {
-  //     dispatch(resetErrors);
-  //   };
-  // }, [router, dispatch]);
+  useEffect(() => {
+    return () => {
+      dispatch(resetErrors);
+    };
+  }, []);
 
   return (
     <Layout>
