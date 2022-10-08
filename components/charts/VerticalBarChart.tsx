@@ -47,6 +47,7 @@ const VerticalBarChart: FC<VerticalBarParams> = ({ labels, data }) => {
       {
         label: "Time in seconds",
         data: data,
+        barPercentage: data.length === 1 ? 0.1 : 0.9,
         backgroundColor: [
           "rgba(255, 99, 132, 0.5)",
           "rgba(255, 159, 64, 0.5)",

@@ -3,6 +3,7 @@ import { getAllQueries, getErrorQueries, getMostUsedQueries } from "api/queries"
 import { getCurrentUser } from "api/user";
 import UserRequest from "components/charts/UserRequest";
 import Accordion from "components/common/Accordion/Accordion";
+import Loader from "components/common/Loader";
 import { Title } from "components/common/Typography";
 import LongRequests from "components/dashboard/LongRequests";
 import PeakUsage from "components/dashboard/PeakUsage";
@@ -79,7 +80,8 @@ const Dashboard: NextPage = () => {
   //console.log(state.QueriesReducer.allQueries.data);
   console.log(errorQueries);
 
-  if (!state.QueriesReducer.allQueries.data) return <p>Loading...</p>;
+  if (!state.QueriesReducer.allQueries.data)
+    return <Loader className="flex justify-center items-center h-screen" />;
   return (
     <div className="w-full flex bg-white text-black-primary">
       <div
@@ -159,8 +161,8 @@ const Dashboard: NextPage = () => {
           </div>
           <div className="card w-full mt-8">
             <div className="card__content">
-              <Title as="h2" size="subtitle">
-                Request too long
+              <Title as="h2" size="subtitle" className="mb-4">
+                Queries Type
               </Title>
               <Donuts logs={mostUsedQueries} />
             </div>
