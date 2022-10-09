@@ -1,12 +1,12 @@
-import { useEffect } from "react";
 import { getAllQueries } from "api/queries";
 import SimpleAreaChart from "components/charts/SimpleAreaChart";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Icons from "../../components/icons";
-import QueryView from "../../components/Query/QueryView";
+import QueryView from "../../components/query/QueryView";
 
 const bgImage = "/assets/images/bg.png";
 
