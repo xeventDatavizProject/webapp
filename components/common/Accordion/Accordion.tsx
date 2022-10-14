@@ -1,16 +1,18 @@
 import gsap from "gsap";
 import { FC, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { dateParser } from "utils/dateParser";
 import Markdown from "../Markdown/Markdown";
 import styles from "./Accordion.module.scss";
 
 type AccordionProps = {
   title: string;
-  description: string;
+  body: string;
   delay: number;
+  data: any;
 };
 
-const Accordion: FC<AccordionProps> = ({ title, description, delay }) => {
+const Accordion: FC<AccordionProps> = ({ title, body, delay, data }) => {
   const accordionContentRef = useRef<HTMLDivElement>(null);
   const [accordionContentHeight, setAccordionContentHeight] = useState(0);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
@@ -92,7 +94,31 @@ const Accordion: FC<AccordionProps> = ({ title, description, delay }) => {
           ref={accordionContentRef}
           className="absolute py-4 md:py-8 lg:pr-12"
         >
-          <Markdown className="space-y-4">{description}</Markdown>
+          <Markdown className="space-y-4">{body}</Markdown>
+          <div className="my-5 text-xs">
+            <span className=" underline">Details</span>
+            <ul className="my-5 font-playfairDisplay border rounded-lg p-4 bg-slate-600">
+              <li>
+                <span>database user : </span>
+                {data.database_user}
+              </li>
+              <li>
+                <span>database query time : </span>
+                {data.query_time} s
+              </li>
+              <li>
+                <span>rows examined : </span>
+                {data.rows_examined}
+              </li>
+              <li>
+                <span>rows sent : </span>
+                {data.rows_sent}
+              </li>
+            </ul>
+          </div>
+          <span className=" text-xs italic font-mono">
+            {dateParser(data.date_hour)}
+          </span>
         </div>
       </div>
       <div

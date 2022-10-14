@@ -1,5 +1,10 @@
 import { getAllInstances, getUserInstances } from "api/instances";
-import { getAllQueries, getErrorQueries, getMostUsedQueries } from "api/queries";
+import { getNotifications } from "api/notifications";
+import {
+  getAllQueries,
+  getErrorQueries,
+  getMostUsedQueries,
+} from "api/queries";
 import { getCurrentUser } from "api/user";
 import UserRequest from "components/charts/UserRequest";
 import Accordion from "components/common/Accordion/Accordion";
@@ -16,25 +21,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Donuts from "../components/graph/LogChart";
 
-const listDrawer = [
-  {
-    title: "Error detected",
-    content: " select * from .....",
-  },
-  {
-    title: "Error detected",
-    content: " select * from .....",
-  },
-  {
-    title: "Error detected",
-    content: " select * from .....",
-  },
-  {
-    title: "Error detected",
-    content: " select * from .....",
-  },
-];
-
 const Dashboard: NextPage = () => {
   const router = useRouter();
   const state = useAppSelector((state) => state);
@@ -42,6 +28,7 @@ const Dashboard: NextPage = () => {
   const [mostUsedQueries, setMostUsedQueries] = useState([]);
   const [allQueries, setAllQueries] = useState([]);
   const [errorQueries, setErrorQueries] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
@@ -58,6 +45,7 @@ const Dashboard: NextPage = () => {
     );
     dispatch(getAllQueries()).then((res) => setAllQueries(res.payload));
     dispatch(getErrorQueries()).then((res) => setErrorQueries(res.payload));
+    dispatch(getNotifications()).then((res) => setNotifications(res.payload));
 
     const fetchCurrentUser = async () => {
       const userID = localStorage.getItem("userId");
@@ -69,16 +57,10 @@ const Dashboard: NextPage = () => {
 
     fetchCurrentUser();
     getInstances();
-    // getAllQuery();
     if (state.AuthReducer.isLoggedIn === false) {
       router.push("/login");
     }
   }, []);
-
-  //console.log(mostUsedQueries);
-  //console.log(allQueries);
-  //console.log(state.QueriesReducer.allQueries.data);
-  console.log(errorQueries);
 
   if (!state.QueriesReducer.allQueries.data)
     return <Loader className="flex justify-center items-center h-screen" />;
@@ -102,23 +84,25 @@ const Dashboard: NextPage = () => {
             >
               <span
                 className={`absolute left-0 transform w-full h-[2px]  transition-transform
-              ${isSidebarOpen
-                    ? "rotate-45 translate-y-0 bg-white"
-                    : "translate-y-1 bg-blue-primary"
-                  }`}
+              ${
+                isSidebarOpen
+                  ? "rotate-45 translate-y-0 bg-white"
+                  : "translate-y-1 bg-blue-primary"
+              }`}
               />
               <span
                 className={`absolute left-0 transform w-full h-[2px] bg-black transition-transform
-              ${isSidebarOpen
-                    ? "-rotate-45 translate-y-0 bg-white"
-                    : "-translate-y-1 bg-blue-primary"
-                  }`}
+              ${
+                isSidebarOpen
+                  ? "-rotate-45 translate-y-0 bg-white"
+                  : "-translate-y-1 bg-blue-primary"
+              }`}
               />
             </button>
           </div>
           <ul className="flex items-center">
             <li className="mr-4">
-              <Icons.Refresh />
+              <Icons.Refresh onClick={() => window.location.reload()} />
             </li>
             <li>
               <Icons.Notification
@@ -136,14 +120,16 @@ const Dashboard: NextPage = () => {
                     className="cursor-pointer"
                   />
                 </div>
-                {listDrawer.map((item, index) => (
-                  <Accordion
-                    key={index}
-                    title={item.title}
-                    description={item.content}
-                    delay={index}
-                  />
-                ))}
+                {notifications.length > 0 &&
+                  notifications.map((notification, index) => (
+                    <Accordion
+                      key={index}
+                      title={notification["title"]}
+                      body={notification["body"]}
+                      delay={index}
+                      data={notification["data"]}
+                    />
+                  ))}
               </div>
             </li>
           </ul>

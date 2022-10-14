@@ -1,8 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import AuthReducer from './auth/reducer';
-import InstancesReducer from './instances/reducer';
-import QueriesReducer from './queries/reducer';
-import UsersReducer from './users/reducer';
+import { configureStore } from "@reduxjs/toolkit";
+import AuthReducer from "./auth/reducer";
+import InstancesReducer from "./instances/reducer";
+import NotificationReducer from "./notifications/reducer";
+import QueriesReducer from "./queries/reducer";
+import UsersReducer from "./users/reducer";
 
 export const Store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const Store = configureStore({
     UsersReducer,
     InstancesReducer,
     QueriesReducer,
+    NotificationReducer,
   },
 });
 
@@ -18,7 +20,7 @@ export type RootState = ReturnType<typeof Store.getState>;
 export type AppDispatch = typeof Store.dispatch;
 
 export type ReqType = {
-  status: 'loading' | 'succeeded' | 'failed' | null;
+  status: "loading" | "succeeded" | "failed" | null;
   error?: string;
 };
 
@@ -32,4 +34,15 @@ export type QueriesType = {
   query_time: string;
   rows_sent: number;
   rows_examined: number;
+};
+
+export type NotificationType = {
+  id: string;
+  title: string;
+  body: string;
+  errorId: string;
+  userId: string;
+  data: JSON;
+  sent: boolean;
+  read: boolean;
 };

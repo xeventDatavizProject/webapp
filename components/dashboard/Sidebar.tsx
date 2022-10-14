@@ -1,10 +1,11 @@
 import { activeGlobal } from "api/instances";
 import { Paragraph } from "components/common/Typography";
 import Icons from "components/icons";
+import QueryView from "components/query/QueryView";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { logoutAuth } from "store/auth/reducer";
 
 export type instanceType = {
@@ -23,6 +24,7 @@ export type InstanceArray = {
 const Sidebar: FC<InstanceArray> = ({ instances }) => {
   const router = useRouter();
   const state = useAppSelector((state) => state.UsersReducer);
+  const [status, setStatus] = useState("");
   const dispatch = useAppDispatch();
   const logout = () => {
     dispatch(logoutAuth());
@@ -31,7 +33,7 @@ const Sidebar: FC<InstanceArray> = ({ instances }) => {
 
   const activateGlobal = async () => {
     await dispatch(activeGlobal(instances[0].id)).then((res) => {
-      console.log(res);
+      if (res.meta.requestStatus === "fulfilled") window.location.reload();
     });
   };
 
@@ -79,6 +81,12 @@ const Sidebar: FC<InstanceArray> = ({ instances }) => {
               </li>
             ))}
         </ul>
+      </div>
+      <div className="w-full mx-auto mt-auto h-1/2  p-4">
+        <div className="flex-grow z-20 font-mono tracking-widest text-xs mb-4">
+          Query
+        </div>
+        <QueryView />
       </div>
       <div className="mt-auto">
         <div className="h-px w-full bg-grey-primary mb-4" />

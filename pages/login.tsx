@@ -43,9 +43,7 @@ const Login: NextPage = () => {
           ? router.push("/dashboard")
           : router.push("/register-instance");
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

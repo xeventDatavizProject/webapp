@@ -20,8 +20,6 @@ const ErrorLogs: FC<ErrorQueriesParams> = ({ data }) => {
     return String(value).padStart(2, "0");
   };
 
-  console.log(data);
-
   return (
     <div className="card w-full">
       <div className="card__content">

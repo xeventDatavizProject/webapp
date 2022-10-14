@@ -6,7 +6,7 @@ import {
   Legend,
   LinearScale,
   Title,
-  Tooltip
+  Tooltip,
 } from "chart.js";
 import Input from "components/common/Input/Input";
 import { FC, useEffect, useState } from "react";
@@ -80,9 +80,7 @@ const Donuts: FC<logsType> = ({ logs }) => {
       labels.push(x.query);
     });
 
-    useEffect(() => {
-      console.log(checkedValue);
-    }, [checkedValue]);
+    useEffect(() => {}, [checkedValue]);
 
     return {
       labels,
@@ -118,43 +116,43 @@ const Donuts: FC<logsType> = ({ logs }) => {
         <Bar data={generateChartData()} options={options} />
       </div>
       <div className="">
-        <span className="w-1/12 z-20 font-mono tracking-widest text-xs mb-5 inline-block">
+        {/* <span className="w-1/12 z-20 font-mono tracking-widest text-xs mb-5 inline-block">
           hide/show Query types
-        </span>
+        </span> */}
         <div className=" space-y-4">
           <Input.Checkbox
             label="select"
             id="select"
             value="select"
-            className="peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600"
+            // className="peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600"
             onClick={CheckHandler}
           />
           <Input.Checkbox
             label="show"
             id="show"
             value="show"
-            className="peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-green-600"
+            // className="peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-green-600"
             onClick={CheckHandler}
           />
           <Input.Checkbox
             label="delete"
             id="delete"
             value="delete"
-            className="peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-red-500"
+            // className="peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:bg-red-500"
             onClick={CheckHandler}
           />
           <Input.Checkbox
             label="alter"
             id="alter"
             value="alter"
-            className="peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-yellow-500"
+            // className="peer-focus:ring-red-400 dark:peer-focus:ring-orange-900 peer-checked:bg-yellow-500"
             onClick={CheckHandler}
           />
           <Input.Checkbox
             label="update"
             id="update"
             value="update"
-            className="peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500"
+            // className="peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-orange-500"
             onClick={CheckHandler}
           />
 
@@ -162,7 +160,7 @@ const Donuts: FC<logsType> = ({ logs }) => {
             label="insert"
             id="insert"
             value="insert"
-            className="peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-brown-600"
+            // className="peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:bg-brown-600"
             onClick={CheckHandler}
           />
         </div>
